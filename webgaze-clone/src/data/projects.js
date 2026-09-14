@@ -1,0 +1,88 @@
+export const projects = [
+  {
+    id: 1,
+    name: 'Care Partners Australia',
+    slug: 'care-partners-australia',
+    categories: ['Web Design', 'Branding', 'UI/UX'],
+    image: '/images/projects/care-partners-australia-cover.jpg',
+  },
+  {
+    id: 2,
+    name: 'Australian Ghanaian Chamber of Commerce',
+    slug: 'australian-ghanaian-chamber-of-commerce',
+    categories: ['Web Design', 'Branding'],
+    image: '/images/projects/australian-ghanaian-chamber-of-commerce-cover.jpg',
+  },
+  {
+    id: 3,
+    name: 'WINSTAMAC',
+    slug: 'winstamac',
+    categories: ['Web Design', 'UI/UX'],
+    image: '/images/projects/winstamac-cover.webp',
+  },
+  {
+    id: 4,
+    name: 'Sababa Global Trade & Logistics',
+    slug: 'sababa-global',
+    categories: ['Web Design', 'Branding'],
+    image: '/images/projects/sababa-global-cover.webp',
+  },
+  {
+    id: 5,
+    name: 'Viride Energy Africa',
+    slug: 'viride-energy-africa',
+    categories: ['Web Design', 'Development'],
+    image: '/images/projects/viride-energy-africa-cover.webp',
+  },
+  {
+    id: 6,
+    name: 'Ben Ari Accounting',
+    slug: 'ben-ari-accounting',
+    categories: ['Web Design', 'Product Design'],
+    image: '/images/projects/ben-ari-accounting-cover.jpg',
+  },
+  {
+    id: 7,
+    name: 'PhytoScience Australia',
+    slug: 'phytoscience-australia',
+    categories: ['Web Design', 'Branding'],
+    image: '/images/projects/phytoscience-australia-cover.webp',
+  },
+  {
+    id: 8,
+    name: 'Petra Care Services',
+    slug: 'petra-care-services',
+    categories: ['Web Design', 'UI/UX'],
+    image: '/images/projects/petra-care-services-cover.webp',
+  },
+  {
+    id: 9,
+    name: 'Onboard Plumbing',
+    slug: 'onboard-plumbing',
+    categories: ['Web Design', 'Branding'],
+    image: '/images/projects/onboard-plumbing-cover.jpg',
+  },
+  {
+    id: 10,
+    name: 'Janny Global',
+    slug: 'janny-global',
+    categories: ['Web Design', 'Mobile UI'],
+    image: '/images/projects/janny-global-cover.webp',
+  },
+  {
+    id: 11,
+    name: 'DownUnder Radio',
+    slug: 'downunder-radio',
+    categories: ['Web Design', 'Branding'],
+    image: '/images/projects/downunder-radio-cover.jpg',
+  },
+  {
+    id: 12,
+    name: 'Salaka Dance Ensemble',
+    slug: 'salaka-dance-ensemble',
+    categories: ['Web Design', 'Branding'],
+    image: '/images/projects/salaka-dance-ensemble-cover.webp',
+  },
+]
+
+export const filterCategories = ['All', 'Web Design', 'Branding', 'UI/UX']
