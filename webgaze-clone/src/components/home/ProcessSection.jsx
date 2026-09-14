@@ -3,67 +3,77 @@ const steps = [
     number: '01',
     title: 'Discovery & Understanding',
     tagline: 'We listen before we act.',
-    description: 'We take the time to understand your business, goals, and audience before making any recommendations.',
-    tags: ['Research', 'Strategy', 'Analysis'],
+    description: 'We get clear on your goals, your audience, and the context around the work — defining what success looks like before a single pixel moves.',
+    tags: ['Kickoff Call', 'Goals', 'Research'],
   },
   {
     number: '02',
     title: 'Direction & Planning',
     tagline: 'We map the path forward.',
-    description: 'We create a clear roadmap with defined milestones, timelines, and deliverables.',
-    tags: ['Planning', 'Wireframes', 'Scope'],
+    description: 'With the picture in place, we set scope, priorities, and the practical steps to move — keeping everything aligned, realistic, and built for results.',
+    tags: ['Scope', 'Sitemap', 'Timeline'],
   },
   {
     number: '03',
     title: 'Development & Refinement',
     tagline: 'We build and iterate.',
-    description: 'We bring the design to life with clean, performant code and continuous feedback loops.',
-    tags: ['Build', 'Test', 'Iterate'],
+    description: 'Design, content, and systems are shaped through an iterative loop — focused on quality, consistency, and purpose at every stage.',
+    tags: ['Design', 'Build', 'Feedback'],
   },
   {
     number: '04',
     title: 'Delivery & Implementation',
     tagline: 'We launch with confidence.',
-    description: 'We deploy your project, ensure everything works perfectly, and provide ongoing support.',
-    tags: ['Launch', 'Support', 'Optimise'],
+    description: 'We bring it together, run final checks, and hand over a site that\'s complete and ready to perform — with support so nothing slips.',
+    tags: ['QA', 'Launch', 'Handover'],
   },
 ]
 
 export default function ProcessSection() {
   return (
-    <section className="relative overflow-hidden bg-[#101010] section-pad">
-      <div className="container-wide">
-        <div className="mb-16 text-center">
-          <span className="label-tag">How We Work</span>
-          <h2 className="mt-6 text-[clamp(2rem,5vw,2.8rem)] font-bold text-white font-display">
-            A process built for clarity, not chaos.
-          </h2>
+    <section className="relative bg-[#101010] overflow-hidden section-pad">
+      <div className="absolute top-0 inset-x-0 h-px bg-white/10"></div>
+      <div className="pointer-events-none absolute inset-0 opacity-60" style={{ background: 'radial-gradient(45% 40% at 85% 15%, rgba(224,27,36,0.08), transparent 70%)' }}></div>
+      <div className="container-wide relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 mb-16 md:mb-20">
+          <div>
+            <div className="flex items-center gap-3 mb-5">
+              <span className="block w-8 h-[2px] bg-red-brand"></span>
+              <span className="font-display text-xs font-semibold tracking-[0.22em] uppercase text-red-brand">How We Work</span>
+            </div>
+            <h2 className="font-display font-bold text-[clamp(2rem,5vw,2.8rem)] text-white leading-[1.1]">
+              A process built for clarity, not chaos.
+            </h2>
+          </div>
+          <p className="lg:pt-2 lg:self-end font-body text-base text-white/55 leading-relaxed max-w-md">
+            From the first conversation to final delivery, every step is intentional — keeping you informed, on time, and confident in the outcome.
+          </p>
         </div>
 
         <div className="relative">
-          <div className="absolute left-0 right-0 top-[28px] hidden h-[1px] bg-white/10 lg:block" />
-
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-4">
+          <div className="hidden lg:block absolute top-[1.375rem] left-0 right-0 h-px bg-white/10"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-8">
             {steps.map((step) => (
-              <div key={step.number} className="relative text-center lg:text-left">
-                <div className="relative z-10 mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-[#101010] text-lg font-bold text-red-brand font-display lg:mx-0">
-                  {step.number}
+              <div key={step.number} className="relative">
+                <div className="relative z-10 mb-7">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#0a0a0a] font-display font-bold text-sm tracking-[0.1em] text-red-brand">
+                    {step.number}
+                  </span>
                 </div>
-
-                <h3 className="text-lg font-bold text-white font-display">
+                <h3 className="font-display font-bold text-lg md:text-xl text-white leading-snug mb-2">
                   {step.title}
                 </h3>
-                <p className="mt-1 text-sm font-medium text-red-brand">
+                <p className="font-display text-sm font-medium text-red-brand/90 mb-4">
                   {step.tagline}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-white/50">
+                <p className="font-body text-sm text-white/55 leading-relaxed mb-6">
                   {step.description}
                 </p>
-                <div className="mt-4 flex flex-wrap justify-center gap-2 lg:justify-start">
+                <div className="flex flex-wrap gap-2">
                   {step.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40"
+                      className="text-[10px] font-display font-semibold tracking-[0.12em] uppercase px-2.5 py-1 rounded-full border border-white/10 text-white/55"
                     >
                       {tag}
                     </span>

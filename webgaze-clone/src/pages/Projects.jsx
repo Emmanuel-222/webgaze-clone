@@ -39,43 +39,51 @@ export default function Projects() {
     <div className="min-h-screen bg-light-bg">
       <Navbar />
 
-      <section className="relative min-h-[380px] bg-[#0a0a0a]">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(/images/hero-bg.jpg)' }}
+      <section className="relative overflow-hidden min-h-[380px] flex flex-col justify-end bg-[#0a0a0a] pb-16 pt-36">
+        <img
+          alt=""
+          aria-hidden="true"
+          className="object-cover object-center absolute inset-0 h-full w-full"
+          src="/images/hero-bg.jpg"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/60 to-[#0a0a0a]/90" />
-        <div className="container-wide relative z-10 flex min-h-[380px] flex-col justify-end pb-12 pt-32">
-          <a
-            href="/"
-            className="mb-6 inline-flex items-center gap-2 text-sm text-white/60 transition-colors duration-200 hover:text-white"
-          >
-            <span>&larr;</span> Go back
-          </a>
-          <h1 className="text-[clamp(2.55rem,10.5vw,3.7rem)] font-bold text-white font-display">
-            Our Work
-          </h1>
-          <p className="mt-4 max-w-xl text-base text-white/60">
-            A selection of projects we've delivered for clients across Australia and beyond.
-          </p>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
+        <div className="container-wide relative z-10">
+          <div className="max-w-[760px]">
+            <div className="mb-5">
+              <a
+                className="inline-flex items-center gap-2 text-white/40 hover:text-white/80 text-sm font-display font-medium transition-colors duration-200 group"
+                aria-label="Go back"
+                href="/"
+              >
+                <span className="transition-transform duration-200 group-hover:-translate-x-1 text-base leading-none">←</span>
+              </a>
+            </div>
+            <h1 className="font-display font-bold text-white max-w-[18ch] text-[clamp(2.55rem,10.5vw,3.7rem)] leading-[1.02] tracking-[-0.035em]">
+              Our Work
+            </h1>
+            <p className="mt-4 font-body text-white/55 text-base leading-relaxed max-w-[44ch]">
+              Selected websites, brands, and digital systems built for businesses across Australia.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="section-pad">
-        <div className="container-wide">
-          <div className="mb-10 flex flex-wrap items-center gap-3 border-b border-[#e5e5e0] pb-6">
-            <span className="mr-4 text-sm font-medium text-[#4a4a4a]">
+      <section className="bg-light-bg px-4 py-14 md:px-10 md:py-20 lg:px-16">
+        <div className="mx-auto max-w-[1320px]">
+          <div className="mb-12 flex flex-col gap-5 border-b border-[#dcdcd6] pb-6 md:flex-row md:items-center md:justify-between">
+            <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#101010]">
               Selected Work
-            </span>
-            <span className="text-sm text-[#6a6a6a]">
-              {filteredProjects.length} project{filteredProjects.length !== 1 ? 's' : ''}
-            </span>
-            <div className="ml-auto flex gap-2">
+              <span className="ml-3 font-body text-[#a3a39b]">
+                {filteredProjects.length} projects
+              </span>
+            </p>
+            <div className="flex flex-wrap gap-2">
               {filterCategories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setActiveFilter(category)}
-                  className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                  className={`cursor-pointer rounded-full border px-4 py-2 font-display text-xs font-bold transition-colors duration-200 ${
                     activeFilter === category
                       ? 'border-red-brand bg-red-brand text-white'
                       : 'border-[#cfcfca] bg-white text-[#4a4a4a] hover:border-red-brand hover:text-red-brand'
@@ -87,7 +95,7 @@ export default function Projects() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}

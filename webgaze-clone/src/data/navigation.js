@@ -16,7 +16,7 @@ export const clientLogos = [
 ]
 
 export const socialLinks = [
-  { name: 'LinkedIn', url: '#' },
-  { name: 'Instagram', url: '#' },
-  { name: 'X', url: '#' },
+  { name: 'LinkedIn', url: 'https://www.linkedin.com/company/webgaze' },
+  { name: 'Instagram', url: 'https://www.instagram.com/webgaze.au' },
+  { name: 'X', url: 'https://x.com/webgaze_au' },
 ]

@@ -2,45 +2,61 @@ import { services } from '../../data/services.js'
 
 export default function ServicesSection() {
   return (
-    <section className="bg-[#f4f4f1] section-pad">
+    <section className="bg-light-bg border-t border-light-border py-20 md:py-28 lg:py-36">
       <div className="container-wide">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <div className="lg:sticky lg:top-32 lg:self-start">
-            <span className="label-tag">Services</span>
-            <h2 className="mt-6 text-[clamp(2rem,5vw,2.8rem)] font-bold leading-tight text-[#1a1a1a] font-display">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.2fr] gap-14 lg:gap-20 items-start">
+          <div className="lg:sticky lg:top-40 lg:self-start">
+            <h2 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-[#0f0f0f] leading-[1.1]">
               Everything You Need to Build a Strong Online Presence
             </h2>
-            <p className="mt-4 max-w-md text-base leading-relaxed text-[#6a6a6a]">
-              From strategy to execution, we deliver end-to-end digital solutions that help your business grow.
+            <p className="mt-6 font-body text-base text-light-muted leading-relaxed max-w-md">
+              From strategy and design to optimisation and ongoing support, our services work together to help your business grow online — with clarity and confidence at every step.
             </p>
-            <div className="mt-8 flex gap-4">
-              <a href="/contact" className="btn-primary">Start a Project</a>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="/request-a-quote" className="btn-primary">Start a Project</a>
               <a href="/services" className="btn-outline-dark">All Services</a>
             </div>
           </div>
 
-          <div className="space-y-6">
-            {services.map((service) => (
+          <div className="relative">
+            {services.map((service, index) => (
               <div
                 key={service.id}
-                className="rounded-2xl border border-[#e5e5e0] bg-white p-8 shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_8px_32px_rgba(0,0,0,0.08)]"
+                className="sticky mb-4"
+                style={{ top: `${160 + index * 28}px`, zIndex: index + 1 }}
               >
-                <h3 className="text-lg font-bold text-[#1a1a1a] font-display">
-                  {service.title}
-                </h3>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {service.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full border border-[#e5e5e0] bg-[#f4f4f1] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[#6a6a6a]"
+                <div className="bg-white border border-light-border rounded-2xl p-8 group shadow-[0_4px_24px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_40px_rgba(0,0,0,0.12)] transition-all duration-300">
+                  <h3 className="font-display font-bold text-xl text-[#0f0f0f] mb-4 leading-snug">
+                    {service.title}
+                  </h3>
+                  <p className="font-body text-[15px] text-light-muted leading-relaxed mb-6">
+                    {service.description}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {service.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[11px] font-display font-semibold tracking-[0.14em] uppercase px-3 py-1.5 rounded-full border border-light-border text-[#555]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="border-t border-light-border pt-5 flex items-center justify-between gap-4">
+                    <a
+                      href={`/services/${service.slug || service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`}
+                      className="inline-flex items-center gap-2 font-display font-semibold text-sm text-[#0f0f0f] border border-[#0f0f0f] rounded-full px-4 py-2 hover:bg-[#0f0f0f] hover:text-white transition-all duration-200"
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      Learn more →
+                    </a>
+                    <a
+                      href="/projects"
+                      className="font-display font-bold text-sm text-[#0f0f0f] hover:text-red-brand transition-colors duration-200"
+                    >
+                      View Our Work →
+                    </a>
+                  </div>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-[#6a6a6a]">
-                  {service.description}
-                </p>
               </div>
             ))}
           </div>

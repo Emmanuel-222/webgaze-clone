@@ -12,8 +12,8 @@
   --color-light-muted: #b0b0a8;
   --color-light-border: #cfcfca;
 
-  --font-display: "Clash Display", sans-serif;
-  --font-body: "General Sans", sans-serif;
+  --font-display: "Inter", sans-serif;
+  --font-body: "Inter", sans-serif;
 
   --max-width-wide: 1320px;
 }
@@ -51,6 +51,18 @@
 
 @utility section-pad {
   @apply py-16 md:py-24;
+}
+
+@utility divider {
+  @apply border-t border-dark-border;
+}
+
+@utility text-display-md {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+}
+
+@utility text-display-xl {
+  font-size: clamp(2.55rem, 10.5vw, 3.7rem);
 }
 
 @keyframes blink {
