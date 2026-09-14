@@ -1,6 +1,42 @@
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { projects } from '../../data/projects.js'
 import { useScrollProgress } from '../../hooks/useScrollProgress'
+
+function RevealImage({ src, alt, className }) {
+  const [revealed, setRevealed] = useState(false)
+  const imgRef = useRef(null)
+
+  useEffect(() => {
+    const el = imgRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div ref={imgRef} className={`relative h-full w-full overflow-hidden ${className || ''}`}>
+      <img
+        alt={alt}
+        className={`object-cover object-center absolute h-full w-full inset-0 transition-all duration-[1200ms] ease-out ${
+          revealed
+            ? 'blur-0 scale-100 opacity-100'
+            : 'blur-[18px] scale-[1.08] opacity-40'
+        }`}
+        src={src}
+        loading="lazy"
+      />
+    </div>
+  )
+}
 
 export default function ProjectsParallax() {
   const sectionRef = useRef(null)
@@ -40,7 +76,7 @@ export default function ProjectsParallax() {
         <div className="flex-1 flex items-center mt-8 md:mt-10">
           <div className="will-change-transform w-full" style={{ opacity: Math.max(0.2, 1 - progress * 2), transform: `translateY(${-progress * 100}px) rotateX(${progress * 15}deg) rotateZ(${progress * 10}deg)` }}>
             <div className="mb-3 md:mb-4 lg:mb-5">
-              <div className="flex w-max">
+              <div className="flex w-max animate-marquee">
                 {[...row1, ...row1].map((project, i) => (
                   <div key={i} className="shrink-0 pr-3 md:pr-4 lg:pr-5">
                     <div className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]">
@@ -50,11 +86,9 @@ export default function ProjectsParallax() {
                         href={`/projects/${project.slug}`}
                       >
                         <div className="relative h-full w-full overflow-hidden">
-                          <img
+                          <RevealImage
                             alt={project.name}
-                            className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-700 ease-out group-hover/product:scale-[1.06]"
                             src={project.image}
-                            loading="lazy"
                           />
                           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/35 to-transparent"></div>
                           <div className="absolute inset-x-0 bottom-0 p-3">
@@ -70,7 +104,7 @@ export default function ProjectsParallax() {
               </div>
             </div>
 
-            <div className="flex w-max">
+            <div className="flex w-max animate-marquee-reverse">
               {[...row2, ...row2].map((project, i) => (
                 <div key={i} className="shrink-0 pr-3 md:pr-4 lg:pr-5">
                   <div className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]">
@@ -80,11 +114,9 @@ export default function ProjectsParallax() {
                       href={`/projects/${project.slug}`}
                     >
                       <div className="relative h-full w-full overflow-hidden">
-                        <img
+                        <RevealImage
                           alt={project.name}
-                          className="object-cover object-center absolute h-full w-full inset-0 transition-transform duration-700 ease-out group-hover/product:scale-[1.06]"
                           src={project.image}
-                          loading="lazy"
                         />
                         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/35 to-transparent"></div>
                         <div className="absolute inset-x-0 bottom-0 p-3">

@@ -48,25 +48,26 @@ export default function HeroSection() {
 
       <div className="absolute -bottom-40 -right-40 w-[720px] h-[720px] bg-red-brand/[0.06] blur-[160px] rounded-full pointer-events-none"></div>
 
-      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-end text-right pt-32 pb-12">
+      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-center text-center pt-32 pb-12">
         <h1 className="font-display font-bold leading-[1.05] tracking-[-0.04em] text-white text-[clamp(1.85rem,4.5vw,4.4rem)]">
           <span className="block">We build modern brands</span>
           <span className="block">and digital experiences</span>
         </h1>
         <p className="mt-6 font-display font-semibold tracking-[-0.015em] text-white/70 text-[clamp(1.3rem,2.8vw,2.8rem)]">
-          Designed to <span className="relative inline-flex align-baseline whitespace-pre">
+          <span className="text-white">Designed to</span>{' '}
+          <span className="relative inline-flex align-baseline whitespace-pre">
             <span className="invisible font-bold">{typedText}|</span>
             <span className="sr-only">deliver results, build trust, drive growth</span>
             <span className="absolute left-0 top-0 text-left font-bold text-red-brand">
               <span className="font-normal">|</span>
             </span>
-            <span className="font-bold">{typedText}</span>
+            <span className="font-bold text-red-brand">{typedText}</span>
           </span>
         </p>
-        <p className="mt-9 ml-auto max-w-xl text-left font-body text-base md:text-lg text-white/65 leading-relaxed">
+        <p className="mt-9 mx-auto max-w-xl text-left font-body text-base md:text-lg text-white/65 leading-relaxed">
           A strategic web design, branding, and SEO studio creating clear, practical work that helps Australian businesses grow.
         </p>
-        <div className="mt-10 flex flex-col items-end sm:flex-row sm:justify-end gap-4">
+        <div className="mt-10 flex flex-col items-center sm:flex-row sm:justify-center gap-4">
           <a href="/contact" className="btn-primary justify-center">
             Start a Project
           </a>

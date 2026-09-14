@@ -1,32 +1,75 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { navLinks } from '../../data/navigation'
 
+const BUILT_ROUTES = ['/', '/projects']
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [isDarkSection, setIsDarkSection] = useState(true)
   const location = useLocation()
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  const navRef = useRef(null)
 
   useEffect(() => {
     setIsOpen(false)
   }, [location])
 
+  useEffect(() => {
+    const checkSection = () => {
+      if (!navRef.current) return
+
+      const navRect = navRef.current.getBoundingClientRect()
+      const navCenterY = navRect.top + navRect.height / 2
+
+      const sections = document.querySelectorAll('section, main > div, [class*="bg-"]')
+      let currentSection = null
+
+      for (const section of sections) {
+        const rect = section.getBoundingClientRect()
+        if (rect.top <= navCenterY && rect.bottom >= navCenterY) {
+          currentSection = section
+          break
+        }
+      }
+
+      if (currentSection) {
+        const bgColor = window.getComputedStyle(currentSection).backgroundColor
+        const isLight = isLightColor(bgColor)
+        setIsDarkSection(!isLight)
+      }
+    }
+
+    const isLightColor = (color) => {
+      if (!color || color === 'rgba(0, 0, 0, 0)') return false
+      const rgb = color.match(/\d+/g)
+      if (!rgb) return false
+      const [r, g, b] = rgb.map(Number)
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+      return luminance > 0.5
+    }
+
+    checkSection()
+    window.addEventListener('scroll', checkSection, { passive: true })
+    return () => window.removeEventListener('scroll', checkSection)
+  }, [])
+
+  const isBuilt = (href) => BUILT_ROUTES.includes(href)
+
+  const navBgDark = isDarkSection
+    ? 'border-[#292929]/60 bg-[#0a0a0a]/80 backdrop-blur-xl text-white shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
+    : 'border-[#dcdcd6]/60 bg-white/80 backdrop-blur-xl text-[#0a0a0a] shadow-[0_8px_32px_rgba(0,0,0,0.08)]'
+
+  const linkTextDark = isDarkSection ? 'text-white/72 hover:text-white' : 'text-[#0a0a0a]/60 hover:text-[#0a0a0a]'
+  const activeBgDark = isDarkSection ? 'bg-red-brand shadow-[0_10px_24px_rgba(224,27,36,0.22)]' : 'bg-red-brand shadow-[0_10px_24px_rgba(224,27,36,0.22)]'
+
   return (
-    <header className="fixed inset-x-0 top-5 z-[100] overflow-visible">
+    <header ref={navRef} className="fixed inset-x-0 top-5 z-[100] overflow-visible">
       <div className="container-wide relative flex items-center justify-between">
         {/* Mobile nav background */}
         <div
-          className={`pointer-events-none absolute -top-5 -inset-x-3 -bottom-2 rounded-b-2xl border border-t-0 backdrop-blur-xl transition-[transform,opacity,background-color,border-color,box-shadow] duration-300 ease-out lg:hidden ${
-            scrolled
-              ? 'border-white/15 bg-[#101010]/55 text-white shadow-[0_16px_44px_rgba(0,0,0,0.18)]'
-              : 'border-white/15 bg-[#101010]/55 text-white shadow-[0_16px_44px_rgba(0,0,0,0.18)]'
-          } ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-0 opacity-100'}`}
+          className={`pointer-events-none absolute -top-5 -inset-x-3 -bottom-2 rounded-b-2xl border border-t-0 transition-[transform,opacity,background-color,border-color,box-shadow,backdrop-filter] duration-300 ease-out lg:hidden ${navBgDark} ${
+            isOpen ? 'translate-y-0 opacity-100' : 'translate-y-0 opacity-100'
+          }`}
         ></div>
 
         <Link
@@ -36,12 +79,12 @@ export default function Navbar() {
           <img
             alt="WebGaze"
             className="h-8 sm:h-9 w-auto"
-            src="/images/logo-white.png"
+            src={isDarkSection ? '/images/logo-white.png' : '/images/logo-white.png'}
           />
         </Link>
 
         {/* Desktop nav */}
-        <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border px-5 py-3 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-300 lg:flex border-white/15 bg-[#101010]/55 text-white shadow-[0_16px_44px_rgba(0,0,0,0.18)]">
+        <nav className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border px-5 py-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 lg:flex ${navBgDark}`}>
           {navLinks.map((link) => {
             if (link.label === 'Services') {
               return (
@@ -50,12 +93,24 @@ export default function Navbar() {
                     aria-haspopup="menu"
                     aria-expanded="false"
                     aria-controls="services-menu"
-                    className="group relative flex h-8 items-center gap-1 overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand text-white/72 hover:text-white"
+                    className={`group relative flex h-8 items-center gap-1 overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand ${linkTextDark}`}
                   >
                     Services
                     <span className="relative z-10 text-[10px] mt-0.5 opacity-70">▼</span>
                   </button>
                 </div>
+              )
+            }
+            if (!isBuilt(link.href)) {
+              return (
+                <span
+                  key={link.label}
+                  className={`group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 cursor-default ${isDarkSection ? 'text-white/30' : 'text-[#0a0a0a]/30'}`}
+                >
+                  <span className={`relative z-10 ${isDarkSection ? 'text-white/30' : 'text-[#0a0a0a]/30'}`}>
+                    {link.label}
+                  </span>
+                </span>
               )
             }
             return (
@@ -65,9 +120,9 @@ export default function Navbar() {
                 className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand"
               >
                 {location.pathname === link.href && (
-                  <span className="absolute inset-0 rounded-full bg-red-brand shadow-[0_10px_24px_rgba(224,27,36,0.22)]"></span>
+                  <span className={`absolute inset-0 rounded-full ${activeBgDark}`}></span>
                 )}
-                <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${location.pathname === link.href ? 'text-white' : 'text-white/72'}`}>
+                <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${location.pathname === link.href ? 'text-white' : linkTextDark}`}>
                   {link.label}
                 </span>
               </Link>
@@ -85,7 +140,7 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full transition-[transform,opacity,color] duration-300 ease-out lg:hidden text-white translate-y-0 opacity-100"
+          className={`relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full transition-[transform,opacity,color] duration-300 ease-out lg:hidden translate-y-0 opacity-100 ${isDarkSection ? 'text-white' : 'text-[#0a0a0a]'}`}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isOpen}
         >
@@ -97,24 +152,38 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 top-0 z-[99] bg-[#0a0a0a]/95 backdrop-blur-xl transition-all duration-300 lg:hidden ${
-          isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
+        className={`fixed inset-0 top-0 z-[99] backdrop-blur-xl transition-all duration-300 lg:hidden ${
+          isDarkSection ? 'bg-[#0a0a0a]/95' : 'bg-white/95'
+        } ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
         <div className="flex h-full flex-col items-center justify-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              to={link.href}
-              className={`text-2xl font-semibold transition-colors duration-200 ${
-                location.pathname === link.href
-                  ? 'text-red-brand'
-                  : 'text-white/70 hover:text-white'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            if (!isBuilt(link.href)) {
+              return (
+                <span
+                  key={link.label}
+                  className={`text-2xl font-semibold transition-colors duration-200 cursor-default ${isDarkSection ? 'text-white/30' : 'text-[#0a0a0a]/30'}`}
+                >
+                  {link.label}
+                </span>
+              )
+            }
+            return (
+              <Link
+                key={link.label}
+                to={link.href}
+                className={`text-2xl font-semibold transition-colors duration-200 ${
+                  location.pathname === link.href
+                    ? 'text-red-brand'
+                    : isDarkSection
+                      ? 'text-white/70 hover:text-white'
+                      : 'text-[#0a0a0a]/70 hover:text-[#0a0a0a]'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
           <Link to="/request-a-quote" className="btn-primary mt-4">
             Request a Proposal
           </Link>

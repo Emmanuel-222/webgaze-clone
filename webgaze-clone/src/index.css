@@ -81,6 +81,14 @@
   animation: marquee 25s linear infinite;
 }
 
+@keyframes marquee-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse 25s linear infinite;
+}
+
 .fade-in-up {
   opacity: 0;
   transform: translateY(18px);
