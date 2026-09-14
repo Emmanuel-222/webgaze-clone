@@ -1,26 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer components {
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-red-brand px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-red-dark;
-  }
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:border-white/40 hover:bg-white/10;
-  }
-  .btn-outline-dark {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-light-border bg-white px-6 py-3 text-sm font-semibold text-[#4a4a4a] transition-all duration-200 hover:border-red-brand hover:text-red-brand;
-  }
-  .label-tag {
-    @apply inline-block rounded-full border border-red-brand/20 bg-red-brand/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-red-brand;
-  }
-  .container-wide {
-    @apply mx-auto w-full max-w-wide px-5 lg:px-8;
-  }
-  .section-pad {
-    @apply py-16 md:py-24;
-  }
+@theme {
+  --color-red-brand: #E01B24;
+  --color-red-dark: #c4161e;
+  --color-dark-bg: #0a0a0a;
+  --color-dark-surface: #101010;
+  --color-dark-elevated: #111;
+  --color-dark-muted: #9a9a92;
+  --color-dark-border: #292929;
+  --color-light-bg: #f4f4f1;
+  --color-light-muted: #b0b0a8;
+  --color-light-border: #cfcfca;
+
+  --font-display: "Clash Display", sans-serif;
+  --font-body: "General Sans", sans-serif;
+
+  --max-width-wide: 1320px;
 }
 
 @layer base {
@@ -28,8 +23,34 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply font-body antialiased;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
+
+@utility btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-red-brand px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-red-dark;
+}
+
+@utility btn-outline {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:border-white/40 hover:bg-white/10;
+}
+
+@utility btn-outline-dark {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-light-border bg-white px-6 py-3 text-sm font-semibold text-[#4a4a4a] transition-all duration-200 hover:border-red-brand hover:text-red-brand;
+}
+
+@utility label-tag {
+  @apply inline-block rounded-full border border-red-brand/20 bg-red-brand/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-red-brand;
+}
+
+@utility container-wide {
+  @apply mx-auto w-full max-w-wide px-5 lg:px-8;
+}
+
+@utility section-pad {
+  @apply py-16 md:py-24;
 }
 
 @keyframes blink {
