@@ -53,20 +53,19 @@ export default function HeroSection() {
           <span className="block">We build modern brands</span>
           <span className="block">and digital experiences</span>
         </h1>
+
         <p className="mt-6 font-display font-semibold tracking-[-0.015em] text-white/70 text-[clamp(1.3rem,2.8vw,2.8rem)]">
           <span className="text-white">Designed to</span>{' '}
-          <span className="relative inline-flex align-baseline whitespace-pre">
-            <span className="invisible font-bold">{typedText}|</span>
-            <span className="sr-only">deliver results, build trust, drive growth</span>
-            <span className="absolute left-0 top-0 text-left font-bold text-red-brand">
-              <span className="font-normal">|</span>
-            </span>
-            <span className="font-bold text-red-brand">{typedText}</span>
+          <span className="text-red-brand font-bold inline-block min-w-[200px] text-left">
+            {typedText}
+            <span className="animate-blink">|</span>
           </span>
         </p>
-        <p className="mt-9 mx-auto max-w-xl text-left font-body text-base md:text-lg text-white/65 leading-relaxed">
+
+        <p className="mt-9 mx-auto max-w-xl text-center font-body text-base md:text-lg text-white/65 leading-relaxed">
           A strategic web design, branding, and SEO studio creating clear, practical work that helps Australian businesses grow.
         </p>
+
         <div className="mt-10 flex flex-col items-center sm:flex-row sm:justify-center gap-4">
           <a href="/contact" className="btn-primary justify-center">
             Start a Project
@@ -80,7 +79,7 @@ export default function HeroSection() {
       <div className="pointer-events-none absolute inset-x-0 bottom-24 z-10 flex justify-center">
         <div className="flex flex-col items-center gap-1.5 text-white/40">
           <span className="font-display text-[0.6rem] uppercase tracking-[0.2em]">Scroll</span>
-          <span className="text-sm leading-none">↓</span>
+          <span className="text-sm leading-none animate-bounce">↓</span>
         </div>
       </div>
     </section>

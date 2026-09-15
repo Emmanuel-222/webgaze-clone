@@ -75,6 +75,7 @@ export default function ProjectsParallax() {
 
         <div className="flex-1 flex items-center mt-8 md:mt-10">
           <div className="will-change-transform w-full" style={{ opacity: Math.max(0.2, 1 - progress * 2), transform: `translateY(${-progress * 100}px) rotateX(${progress * 15}deg) rotateZ(${progress * 10}deg)` }}>
+            {/* Row 1 - scrolls left */}
             <div className="mb-3 md:mb-4 lg:mb-5">
               <div className="flex w-max animate-marquee">
                 {[...row1, ...row1].map((project, i) => (
@@ -104,6 +105,7 @@ export default function ProjectsParallax() {
               </div>
             </div>
 
+            {/* Row 2 - scrolls right */}
             <div className="flex w-max animate-marquee-reverse">
               {[...row2, ...row2].map((project, i) => (
                 <div key={i} className="shrink-0 pr-3 md:pr-4 lg:pr-5">

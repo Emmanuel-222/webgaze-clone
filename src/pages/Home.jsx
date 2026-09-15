@@ -11,6 +11,10 @@ import Footer from '../components/shared/Footer'
 
 export default function Home() {
   useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
