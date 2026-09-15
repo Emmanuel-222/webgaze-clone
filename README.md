@@ -1,16 +1,72 @@
-# React + Vite
+# WebGaze Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A pixel-perfect clone of [webgaze.com.au](https://webgaze.com.au/) — a strategic web design, branding, and SEO studio.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 18** with Vite
+- **Tailwind CSS v4** (via `@tailwindcss/vite`)
+- **Framer Motion** for animations
+- **React Router v6** for routing
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Adaptive navbar with sliding red pill indicator
+- Services mega menu with hover delay
+- Hero section with staggered entrance animations
+- Typewriter effect on tagline
+- Scroll-driven 3D reveal carousel (Framer Motion)
+- Infinite autoplay marquee rows
+- Blur-to-clear image reveal on scroll
+- Responsive design (mobile + desktop)
+- Light/dark section-aware navbar
 
-## Expanding the Oxlint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── home/
+│   │   ├── HeroSection.jsx
+│   │   ├── LogoMarquee.jsx
+│   │   ├── ProcessSection.jsx
+│   │   ├── ProjectsParallax.jsx
+│   │   ├── ServicesSection.jsx
+│   │   └── TestimonialsFAQ.jsx
+│   └── shared/
+│       ├── CTABanner.jsx
+│       ├── Footer.jsx
+│       ├── Navbar.jsx
+│       └── ProjectCard.jsx
+├── data/
+│   ├── navigation.js
+│   ├── projects.js
+│   ├── services.js
+│   └── testimonials.js
+├── hooks/
+│   ├── useScrollProgress.jsx
+│   └── useTypewriter.jsx
+├── pages/
+│   ├── Home.jsx
+│   └── Projects.jsx
+├── App.jsx
+├── index.css
+└── main.jsx
+```
+
+## License
+
+This is a clone for educational purposes. Original design by [WebGaze](https://webgaze.com.au/).
