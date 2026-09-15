@@ -48,7 +48,7 @@ export default function HeroSection() {
 
       <div className="absolute -bottom-40 -right-40 w-[720px] h-[720px] bg-red-brand/[0.06] blur-[160px] rounded-full pointer-events-none"></div>
 
-      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-end text-right pt-32 pb-12">
+      {/* <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-end items-end text-right pt-32 pb-12">
         <h1 className="font-display font-bold leading-[1.05] tracking-[-0.04em] text-white text-[clamp(1.85rem,4.5vw,4.4rem)]">
           <span className="block">We build modern brands</span>
           <span className="block">and digital experiences</span>
@@ -60,7 +60,7 @@ export default function HeroSection() {
             <span className="invisible font-bold">{typedText}|</span>
             <span className="sr-only">deliver results, build trust, drive growth</span>
             <span className="absolute left-0 top-0 text-left font-bold text-red-brand">
-              <span className="font-normal">|</span>
+              <span className="animate-blink font-normal">|</span>
             </span>
             <span className="font-bold text-red-brand">{typedText}</span>
           </span>
@@ -78,7 +78,7 @@ export default function HeroSection() {
             See Our Work
           </a>
         </div>
-      </div>
+      </div> */}
 
       <div className="pointer-events-none absolute inset-x-0 bottom-24 z-10 flex justify-center">
         <div className="flex flex-col items-center gap-1.5 text-white/40">

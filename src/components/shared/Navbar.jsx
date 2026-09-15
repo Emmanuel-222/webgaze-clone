@@ -27,11 +27,11 @@ function NavItemLink({ link, isActive, isDarkSection, isBuilt }) {
       {isActive && (
         <span className="absolute inset-0 rounded-full bg-red-brand shadow-[0_10px_24px_rgba(224,27,36,0.22)]"></span>
       )}
-      <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${
-        isActive ? 'text-white' : isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
-      }`}>
-        {link.label}
-      </span>
+      <span className={`relative z-10 transition-colors duration-200 group-hover:text-red-brand ${
+          isActive ? 'text-white' : isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
+        }`}>
+          {link.label}
+        </span>
     </Link>
   )
 }
@@ -45,12 +45,12 @@ function ServicesDropdown({ isDarkSection }) {
         aria-controls="services-menu"
         className="group relative flex h-8 items-center gap-1 overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand cursor-pointer select-none"
       >
-        <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${
+        <span className={`relative z-10 transition-colors duration-200 group-hover:text-red-brand ${
           isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
         }`}>
           Services
         </span>
-        <svg className={`relative z-10 w-3 h-3 mt-0.5 transition-colors duration-200 group-hover:text-white ${
+        <svg className={`relative z-10 w-3 h-3 mt-0.5 transition-colors duration-200 group-hover:text-red-brand ${
           isDarkSection ? 'text-white/50' : 'text-[#0a0a0a]/40'
         }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

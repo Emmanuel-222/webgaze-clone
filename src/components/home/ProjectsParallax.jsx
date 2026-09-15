@@ -26,7 +26,7 @@ function RevealImage({ src, alt, className }) {
     <div ref={imgRef} className={`relative h-full w-full overflow-hidden ${className || ''}`}>
       <img
         alt={alt}
-        className={`object-cover object-center absolute h-full w-full inset-0 transition-all duration-[1200ms] ease-out ${
+        className={`object-cover object-center absolute h-full w-full inset-0 transition-all duration-[1200ms] ease-out group-hover/product:scale-[1.06] ${
           revealed
             ? 'blur-0 scale-100 opacity-100'
             : 'blur-[18px] scale-[1.08] opacity-40'

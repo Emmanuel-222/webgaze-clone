@@ -1,30 +1,44 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export function useTypewriter(words, typingSpeed = 100, deletingSpeed = 50, pause = 2000) {
   const [text, setText] = useState('')
-  const [wordIndex, setWordIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
+  const stateRef = useRef({
+    wordIndex: 0,
+    isDeleting: false,
+    timeoutId: null,
+  })
 
   useEffect(() => {
-    const currentWord = words[wordIndex]
+    const state = stateRef.current
+    const currentWord = words[state.wordIndex]
 
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        setText(currentWord.substring(0, text.length + 1))
-        if (text === currentWord) {
-          setTimeout(() => setIsDeleting(true), pause)
+    const tick = () => {
+      if (!state.isDeleting) {
+        const nextText = currentWord.substring(0, text.length + 1)
+        setText(nextText)
+
+        if (nextText === currentWord) {
+          state.timeoutId = setTimeout(() => {
+            state.isDeleting = true
+            tick()
+          }, pause)
+          return
         }
       } else {
-        setText(currentWord.substring(0, text.length - 1))
-        if (text === '') {
-          setIsDeleting(false)
-          setWordIndex((prev) => (prev + 1) % words.length)
+        const nextText = currentWord.substring(0, text.length - 1)
+        setText(nextText)
+
+        if (nextText === '') {
+          state.isDeleting = false
+          state.wordIndex = (state.wordIndex + 1) % words.length
         }
       }
-    }, isDeleting ? deletingSpeed : typingSpeed)
+    }
 
-    return () => clearTimeout(timeout)
-  }, [text, isDeleting, wordIndex, words, typingSpeed, deletingSpeed, pause])
+    state.timeoutId = setTimeout(tick, state.isDeleting ? deletingSpeed : typingSpeed)
+
+    return () => clearTimeout(state.timeoutId)
+  }, [text, words, typingSpeed, deletingSpeed, pause])
 
   return text
 }

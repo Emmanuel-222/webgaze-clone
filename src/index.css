@@ -27,6 +27,14 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  ::selection {
+    background-color: #E01B24;
+    color: #ffffff;
+  }
+  ::-moz-selection {
+    background-color: #E01B24;
+    color: #ffffff;
+  }
 }
 
 @utility btn-primary {
