@@ -43,7 +43,7 @@ export default function Projects() {
     <div className="min-h-screen bg-[#f4f4f1]">
       <Navbar />
 
-      <section className="relative overflow-hidden min-h-[420px] flex flex-col items-center justify-center bg-[#0a0a0a] pb-14 pt-40">
+      <section className="relative overflow-hidden min-h-[420px] flex flex-col items-center justify-center bg-[#111111] pb-14 pt-40">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
         <div className="container-wide relative z-10 text-center">
           <h1 className="font-display font-bold text-white text-[clamp(2.55rem,10.5vw,4.2rem)] leading-[1.02] tracking-[-0.035em]">

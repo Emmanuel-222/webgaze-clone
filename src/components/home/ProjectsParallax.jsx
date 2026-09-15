@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { projects } from '../../data/projects.js'
-import { useScrollProgress } from '../../hooks/useScrollProgress'
 
 function RevealImage({ src, alt, className }) {
   const [revealed, setRevealed] = useState(false)
@@ -38,24 +38,82 @@ function RevealImage({ src, alt, className }) {
   )
 }
 
+function MarqueeRow({ items, direction = 'left', duration = 48, priority = false }) {
+  const duplicated = [...items, ...items]
+
+  return (
+    <div className="flex w-max">
+      {duplicated.map((project, i) => (
+        <motion.div
+          key={`${project.slug}-${i}`}
+          className="shrink-0 pr-3 md:pr-4 lg:pr-5"
+          whileHover={{ y: -12 }}
+          transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+        >
+          <div className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]">
+            <a
+              aria-label={`View ${project.name}`}
+              className="block h-full w-full rounded-2xl overflow-hidden bg-[#111] ring-1 ring-white/5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover/product:ring-red-brand/40 group-hover/product:shadow-[0_25px_60px_-20px_rgba(224,27,36,0.35)]"
+              href={`/projects/${project.slug}`}
+            >
+              <div className="relative h-full w-full overflow-hidden">
+                <RevealImage alt={project.name} src={project.image} />
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/35 to-transparent"></div>
+                <div className="absolute inset-x-0 bottom-0 p-3">
+                  <h3 className="font-display font-semibold text-white text-xs md:text-sm leading-snug opacity-90 group-hover/product:opacity-100 transition-opacity duration-300">
+                    {project.name}
+                  </h3>
+                </div>
+              </div>
+            </a>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
 export default function ProjectsParallax() {
   const sectionRef = useRef(null)
-  const progress = useScrollProgress(sectionRef)
 
   const row1 = projects.slice(0, 6)
   const row2 = projects.slice(6, 12)
 
-  const row1Translate = -progress * 300
-  const row2Translate = progress * 300
+  // Scroll-driven 3D reveal: unfurls from tilted/hidden to flat/visible
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end end'],
+  })
+
+  const springConfig = { stiffness: 90, damping: 28, mass: 1 }
+
+  const rotateX = useSpring(
+    useTransform(scrollYProgress, [0, 0.3], [15, 0]),
+    springConfig
+  )
+  const rotateZ = useSpring(
+    useTransform(scrollYProgress, [0, 0.3], [10, 0]),
+    springConfig
+  )
+  const translateY = useSpring(
+    useTransform(scrollYProgress, [0, 0.3], [-100, 0]),
+    springConfig
+  )
+  const opacity = useSpring(
+    useTransform(scrollYProgress, [0, 0.3], [0.2, 1]),
+    springConfig
+  )
 
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#0a0a0a] antialiased h-[200vh] md:h-[220vh]"
+      className="relative bg-[#111111] antialiased h-[200vh] md:h-[220vh]"
       aria-labelledby="parallax-heading"
     >
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col pt-16 md:pt-20 pb-10 [perspective:1000px] [transform-style:preserve-3d]">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col [perspective:1000px] [transform-style:preserve-3d] pt-16 md:pt-20 pb-10">
         <div className="pointer-events-none absolute inset-0 opacity-60" style={{ background: 'radial-gradient(60% 40% at 50% 10%, rgba(224,27,36,0.10), transparent 70%), radial-gradient(40% 30% at 80% 60%, rgba(255,255,255,0.04), transparent 70%)' }}></div>
+
+        {/* Heading area - stays fixed while cards move underneath */}
         <div className="container-wide relative w-full z-10">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
             <div>
@@ -76,33 +134,33 @@ export default function ProjectsParallax() {
           </div>
         </div>
 
+        {/* Cards area - autoplay marquee with scroll-driven 3D reveal */}
         <div className="flex-1 flex items-center mt-8 md:mt-10">
-          <div
+          <motion.div
             className="will-change-transform w-full"
-            style={{
-              opacity: Math.max(0.2, 1 - progress * 2),
-              transform: `translateY(${-progress * 100}px) rotateX(${progress * 15}deg) rotateZ(${progress * 10}deg)`,
-            }}
+            style={{ rotateX, rotateZ, translateY, opacity }}
           >
-            {/* Row 1 - scrolls left */}
+            {/* Row 1 - scrolls left, 48s duration */}
             <div className="mb-3 md:mb-4 lg:mb-5">
-              <div
+              <motion.div
                 className="flex w-max"
-                style={{ transform: `translateX(${row1Translate}px)` }}
+                animate={{ x: ['0%', '-50%'] }}
+                transition={{ duration: 48, ease: 'linear', repeat: Infinity }}
               >
-                {[...row1, ...row1, ...row1].map((project, i) => (
-                  <div key={i} className="shrink-0 pr-3 md:pr-4 lg:pr-5">
-                    <div className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]">
+                {[...row1, ...row1].map((project, i) => (
+                  <div key={`r1-${i}`} className="shrink-0 pr-3 md:pr-4 lg:pr-5">
+                    <motion.div
+                      className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]"
+                      whileHover={{ y: -12 }}
+                      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+                    >
                       <a
                         aria-label={`View ${project.name}`}
                         className="block h-full w-full rounded-2xl overflow-hidden bg-[#111] ring-1 ring-white/5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover/product:ring-red-brand/40 group-hover/product:shadow-[0_25px_60px_-20px_rgba(224,27,36,0.35)]"
                         href={`/projects/${project.slug}`}
                       >
                         <div className="relative h-full w-full overflow-hidden">
-                          <RevealImage
-                            alt={project.name}
-                            src={project.image}
-                          />
+                          <RevealImage alt={project.name} src={project.image} />
                           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/35 to-transparent"></div>
                           <div className="absolute inset-x-0 bottom-0 p-3">
                             <h3 className="font-display font-semibold text-white text-xs md:text-sm leading-snug opacity-90 group-hover/product:opacity-100 transition-opacity duration-300">
@@ -111,31 +169,33 @@ export default function ProjectsParallax() {
                           </div>
                         </div>
                       </a>
-                    </div>
+                    </motion.div>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             </div>
 
-            {/* Row 2 - scrolls right */}
+            {/* Row 2 - scrolls right, 57.6s duration */}
             <div>
-              <div
+              <motion.div
                 className="flex w-max"
-                style={{ transform: `translateX(${row2Translate}px)` }}
+                animate={{ x: ['-50%', '0%'] }}
+                transition={{ duration: 57.6, ease: 'linear', repeat: Infinity }}
               >
-                {[...row2, ...row2, ...row2].map((project, i) => (
-                  <div key={i} className="shrink-0 pr-3 md:pr-4 lg:pr-5">
-                    <div className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]">
+                {[...row2, ...row2].map((project, i) => (
+                  <div key={`r2-${i}`} className="shrink-0 pr-3 md:pr-4 lg:pr-5">
+                    <motion.div
+                      className="group/product relative flex-shrink-0 w-[20.4rem] sm:w-[22.8rem] md:w-[26.4rem] lg:w-[30rem] aspect-[16/9]"
+                      whileHover={{ y: -12 }}
+                      transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+                    >
                       <a
                         aria-label={`View ${project.name}`}
                         className="block h-full w-full rounded-2xl overflow-hidden bg-[#111] ring-1 ring-white/5 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.6)] transition-all duration-500 group-hover/product:ring-red-brand/40 group-hover/product:shadow-[0_25px_60px_-20px_rgba(224,27,36,0.35)]"
                         href={`/projects/${project.slug}`}
                       >
                         <div className="relative h-full w-full overflow-hidden">
-                          <RevealImage
-                            alt={project.name}
-                            src={project.image}
-                          />
+                          <RevealImage alt={project.name} src={project.image} />
                           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/5 bg-gradient-to-t from-black/85 via-black/35 to-transparent"></div>
                           <div className="absolute inset-x-0 bottom-0 p-3">
                             <h3 className="font-display font-semibold text-white text-xs md:text-sm leading-snug opacity-90 group-hover/product:opacity-100 transition-opacity duration-300">
@@ -144,12 +204,12 @@ export default function ProjectsParallax() {
                           </div>
                         </div>
                       </a>
-                    </div>
+                    </motion.div>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

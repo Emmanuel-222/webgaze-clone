@@ -56,7 +56,7 @@ export default function ProcessSection() {
             {steps.map((step) => (
               <div key={step.number} className="relative">
                 <div className="relative z-10 mb-7">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#0a0a0a] font-display font-bold text-sm tracking-[0.1em] text-red-brand">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#111111] font-display font-bold text-sm tracking-[0.1em] text-red-brand">
                     {step.number}
                   </span>
                 </div>

@@ -8,10 +8,15 @@ export function useScrollProgress(ref) {
       if (!ref.current) return
       const rect = ref.current.getBoundingClientRect()
       const windowHeight = window.innerHeight
-      const elementHeight = rect.height
+
+      // For a sticky h-[200vh] section:
+      // When rect.top = windowHeight → progress 0 (section just entering)
+      // When rect.bottom = 0 → progress 1 (section leaving)
+      // The sticky content stays pinned while the section scrolls through
       const scrolled = windowHeight - rect.top
-      const total = windowHeight + elementHeight
-      setProgress(Math.min(Math.max(scrolled / total, 0), 1))
+      const totalScrollDistance = rect.height - windowHeight
+      const p = totalScrollDistance > 0 ? scrolled / totalScrollDistance : 0
+      setProgress(Math.min(Math.max(p, 0), 1))
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })

@@ -3,8 +3,8 @@
 @theme {
   --color-red-brand: #E01B24;
   --color-red-dark: #c4161e;
-  --color-dark-bg: #0a0a0a;
-  --color-dark-surface: #101010;
+  --color-dark-bg: #111111;
+  --color-dark-surface: #181818;
   --color-dark-elevated: #111;
   --color-dark-muted: #9a9a92;
   --color-dark-border: #292929;
@@ -114,4 +114,28 @@
 .animate-line-grow {
   animation: line-grow 1.2s ease-out forwards;
   transform-origin: left;
+}
+
+@keyframes hero-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-stagger {
+  opacity: 0;
+  animation: hero-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-stagger {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }

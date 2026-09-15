@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 export default function CTABanner() {
   return (
-    <section className="relative overflow-hidden bg-[#0a0a0a] py-10 md:py-14">
+    <section className="relative overflow-hidden bg-[#111111] py-10 md:py-14">
       <div className="pointer-events-none absolute right-[8%] top-1/2 h-56 w-[420px] -translate-y-1/2 rounded-full bg-red-brand opacity-[0.07] blur-[120px]"></div>
       <div className="absolute inset-x-0 top-0 h-[2px] origin-left bg-red-brand" style={{ transform: 'scaleX(0)' }}></div>
 
