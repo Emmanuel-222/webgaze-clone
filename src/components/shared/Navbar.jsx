@@ -5,41 +5,13 @@ import { navLinks } from '../../data/navigation'
 const BUILT_ROUTES = ['/', '/projects']
 
 function NavItemLink({ link, isActive, isDarkSection, isBuilt }) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [pillStyle, setPillStyle] = useState({ opacity: 0, left: 0, width: 0 })
-  const itemRef = useRef(null)
-
-  const handleMouseEnter = () => {
-    if (!itemRef.current) return
-    const rect = itemRef.current.getBoundingClientRect()
-    setPillStyle({ opacity: 1, left: rect.left - itemRef.current.parentElement.getBoundingClientRect().left, width: rect.width })
-    setIsHovered(true)
-  }
-
-  const handleMouseLeave = () => {
-    setPillStyle({ opacity: 0, left: pillStyle.left, width: pillStyle.width })
-    setIsHovered(false)
-  }
-
   if (!isBuilt) {
     return (
       <span
-        ref={itemRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        className={`group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 cursor-pointer select-none`}
+        className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 cursor-pointer select-none"
       >
-        {(isHovered || isActive) && (
-          <span
-            className="absolute inset-0 rounded-full transition-all duration-300 ease-out"
-            style={{
-              backgroundColor: isDarkSection ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
-              opacity: pillStyle.opacity,
-            }}
-          />
-        )}
-        <span className={`relative z-10 transition-colors duration-200 ${
-          isDarkSection ? 'text-white/50 group-hover:text-white' : 'text-[#0a0a0a]/50 group-hover:text-[#0a0a0a]'
+        <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${
+          isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
         }`}>
           {link.label}
         </span>
@@ -49,28 +21,14 @@ function NavItemLink({ link, isActive, isDarkSection, isBuilt }) {
 
   return (
     <Link
-      ref={itemRef}
       to={link.href}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
       className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand"
     >
-      {(isHovered || isActive) && (
-        <span
-          className={`absolute inset-0 rounded-full transition-all duration-300 ease-out ${isActive ? 'bg-red-brand' : ''}`}
-          style={{
-            backgroundColor: isActive ? undefined : isDarkSection ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
-            opacity: pillStyle.opacity,
-            boxShadow: isActive ? '0 10px 24px rgba(224,27,36,0.22)' : undefined,
-          }}
-        />
+      {isActive && (
+        <span className="absolute inset-0 rounded-full bg-red-brand shadow-[0_10px_24px_rgba(224,27,36,0.22)]"></span>
       )}
-      <span className={`relative z-10 transition-colors duration-200 ${
-        isActive
-          ? 'text-white'
-          : isDarkSection
-            ? 'text-white/72 group-hover:text-white'
-            : 'text-[#0a0a0a]/60 group-hover:text-[#0a0a0a]'
+      <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${
+        isActive ? 'text-white' : isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
       }`}>
         {link.label}
       </span>
@@ -79,35 +37,23 @@ function NavItemLink({ link, isActive, isDarkSection, isBuilt }) {
 }
 
 function ServicesDropdown({ isDarkSection }) {
-  const [isHovered, setIsHovered] = useState(false)
-
   return (
     <div className="relative">
       <button
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
         aria-haspopup="menu"
         aria-expanded="false"
         aria-controls="services-menu"
-        className={`group relative flex h-8 items-center gap-1 overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand cursor-pointer select-none`}
+        className="group relative flex h-8 items-center gap-1 overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand cursor-pointer select-none"
       >
-        {isHovered && (
-          <span
-            className="absolute inset-0 rounded-full transition-all duration-300 ease-out"
-            style={{
-              backgroundColor: isDarkSection ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
-            }}
-          />
-        )}
-        <span className={`relative z-10 transition-colors duration-200 ${
-          isDarkSection ? 'text-white/72 group-hover:text-white' : 'text-[#0a0a0a]/60 group-hover:text-[#0a0a0a]'
+        <span className={`relative z-10 transition-colors duration-200 group-hover:text-white ${
+          isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
         }`}>
           Services
         </span>
-        <svg className={`relative z-10 w-3 h-3 transition-colors duration-200 ${
+        <svg className={`relative z-10 w-3 h-3 mt-0.5 transition-colors duration-200 group-hover:text-white ${
           isDarkSection ? 'text-white/50' : 'text-[#0a0a0a]/40'
         }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
         </svg>
       </button>
     </div>
@@ -170,16 +116,16 @@ export default function Navbar() {
       <div className="container-wide relative flex items-center justify-between">
         {/* Mobile nav background */}
         <div
-          className={`pointer-events-none absolute -top-5 -inset-x-3 -bottom-2 rounded-b-2xl border border-t-0 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out lg:hidden ${
+          className={`pointer-events-none absolute -top-5 -inset-x-3 -bottom-2 rounded-b-2xl border border-t-0 backdrop-blur-xl transition-[transform,opacity,background-color,border-color,box-shadow] duration-300 ease-out lg:hidden ${
             isDarkSection
-              ? 'border-[#292929]/60 bg-[#0a0a0a]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
-              : 'border-[#dcdcd6]/60 bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)]'
-          }`}
+              ? 'border-white/15 bg-[#101010]/55 text-white shadow-[0_16px_44px_rgba(0,0,0,0.18)]'
+              : 'border-[#dcdcd6]/60 bg-white/80 text-[#0a0a0a] shadow-[0_16px_44px_rgba(0,0,0,0.08)]'
+          } translate-y-0 opacity-100`}
         ></div>
 
         <Link
           to="/"
-          className="relative z-10 flex h-10 shrink-0 items-center rounded-full transition-transform duration-300 ease-out hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+          className="relative z-10 flex h-10 shrink-0 items-center rounded-full transition-[transform,opacity] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
         >
           <img
             alt="WebGaze"
@@ -189,10 +135,10 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border px-5 py-3 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-500 ease-out lg:flex ${
+        <nav className={`absolute left-1/2 hidden -translate-x-1/2 items-center gap-1 rounded-full border px-5 py-3 backdrop-blur-xl transition-[background-color,border-color,box-shadow] duration-300 lg:flex ${
           isDarkSection
-            ? 'border-[#292929]/60 bg-[#0a0a0a]/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.4)]'
-            : 'border-[#dcdcd6]/60 bg-white/80 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.08)]'
+            ? 'border-white/15 bg-[#101010]/55 text-white shadow-[0_16px_44px_rgba(0,0,0,0.18)]'
+            : 'border-[#dcdcd6]/60 bg-white/80 text-[#0a0a0a] shadow-[0_16px_44px_rgba(0,0,0,0.08)]'
         }`}>
           {navLinks.map((link) => {
             if (link.label === 'Services') {
@@ -212,7 +158,7 @@ export default function Navbar() {
 
         <Link
           to="/request-a-quote"
-          className="hidden h-9 shrink-0 items-center rounded-full bg-red-brand px-4 font-display text-sm font-semibold text-white shadow-[0_10px_24px_rgba(224,27,36,0.22)] transition-all duration-300 hover:bg-red-600 hover:shadow-[0_14px_32px_rgba(224,27,36,0.35)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:flex"
+          className="hidden h-9 shrink-0 items-center rounded-full bg-red-brand px-4 font-display text-sm font-semibold text-white shadow-[0_10px_24px_rgba(224,27,36,0.22)] transition-colors hover:bg-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand focus-visible:ring-offset-2 focus-visible:ring-offset-transparent lg:flex"
         >
           Request a Proposal
         </Link>
@@ -220,8 +166,8 @@ export default function Navbar() {
         {/* Mobile hamburger */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full transition-colors duration-300 ease-out lg:hidden ${
-            isDarkSection ? 'text-white hover:bg-white/10' : 'text-[#0a0a0a] hover:bg-black/5'
+          className={`relative z-10 flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full transition-[transform,opacity,color] duration-300 ease-out lg:hidden translate-y-0 opacity-100 ${
+            isDarkSection ? 'text-white' : 'text-[#0a0a0a]'
           }`}
           aria-label={isOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isOpen}
@@ -234,7 +180,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 top-0 z-[99] backdrop-blur-xl transition-all duration-500 lg:hidden ${
+        className={`fixed inset-0 top-0 z-[99] backdrop-blur-xl transition-all duration-300 lg:hidden ${
           isDarkSection ? 'bg-[#0a0a0a]/95' : 'bg-white/95'
         } ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
