@@ -169,6 +169,9 @@ export default function Navbar() {
   }, [location])
 
   useEffect(() => {
+    const DARK_CLASSES = ['bg-[#111111]', 'bg-[#101010]', 'bg-[#0a0a0a]', 'bg-[#0f0f0f]', 'bg-dark-surface', 'bg-[#111]']
+    const LIGHT_CLASSES = ['bg-[#f4f4f1]', 'bg-light-bg', 'bg-white']
+
     const checkSection = () => {
       if (!navRef.current) return
       const navRect = navRef.current.getBoundingClientRect()
@@ -183,18 +186,12 @@ export default function Navbar() {
         }
       }
       if (currentSection) {
-        const bgColor = window.getComputedStyle(currentSection).backgroundColor
-        const isLight = isLightColor(bgColor)
-        setIsDarkSection(!isLight)
+        const classes = currentSection.className
+        const isDark = DARK_CLASSES.some(c => classes.includes(c))
+        const isLight = LIGHT_CLASSES.some(c => classes.includes(c))
+        if (isDark) setIsDarkSection(true)
+        else if (isLight) setIsDarkSection(false)
       }
-    }
-    const isLightColor = (color) => {
-      if (!color || color === 'rgba(0, 0, 0, 0)') return false
-      const rgb = color.match(/\d+/g)
-      if (!rgb) return false
-      const [r, g, b] = rgb.map(Number)
-      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-      return luminance > 0.5
     }
     checkSection()
     window.addEventListener('scroll', checkSection, { passive: true })
