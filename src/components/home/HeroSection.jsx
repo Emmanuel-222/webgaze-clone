@@ -6,7 +6,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#111111] text-[#fafafa]">
-      <div className="hero-stagger absolute left-0 top-0 h-full w-auto max-w-[40%] sm:max-w-[55%] pointer-events-none select-none opacity-[0.07]" style={{ animationDelay: '0ms' }}>
+      <div className="hero-stagger absolute left-0 top-0 h-full w-auto max-w-[60%] sm:max-w-[55%] pointer-events-none select-none opacity-[0.12] sm:opacity-[0.07]" style={{ animationDelay: '0ms' }}>
       <svg
         viewBox="0 0 800 800"
         xmlns="http://www.w3.org/2000/svg"
