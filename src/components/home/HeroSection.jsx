@@ -16,34 +16,73 @@ export default function HeroSection() {
           className="h-full w-auto"
           aria-hidden="true"
         >
-          <line x1="200" y1="0" x2="200" y2="800" stroke="#888888" strokeWidth="0.3" />
-          <line x1="400" y1="0" x2="400" y2="800" stroke="#888888" strokeWidth="0.3" />
-          <line x1="0" y1="200" x2="800" y2="200" stroke="#888888" strokeWidth="0.3" />
-          <line x1="0" y1="400" x2="800" y2="400" stroke="#888888" strokeWidth="0.3" />
-          <line x1="0" y1="600" x2="800" y2="600" stroke="#888888" strokeWidth="0.3" />
-          <path d="M 170 400 A 30 30 0 0 1 230 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 145 400 A 55 55 0 0 1 255 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 120 400 A 80 80 0 0 1 280 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 95 400 A 105 105 0 0 1 305 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 70 400 A 130 130 0 0 1 330 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 45 400 A 155 155 0 0 1 355 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 20 400 A 180 180 0 0 1 380 400" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 170 600 A 30 30 0 0 0 230 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 145 600 A 55 55 0 0 0 255 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 120 600 A 80 80 0 0 0 280 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 95 600 A 105 105 0 0 0 305 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 70 600 A 130 130 0 0 0 330 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 45 600 A 155 155 0 0 0 355 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M 20 600 A 180 180 0 0 0 380 600" fill="none" stroke="#888888" strokeWidth="0.6" />
-          <path d="M -5 600 A 205 205 0 0 0 405 600" fill="none" stroke="#888888" strokeWidth="0.6" />
+          {/* Static grid lines */}
+          <line x1="200" y1="0" x2="200" y2="800" stroke="#555555" strokeWidth="0.2" />
+          <line x1="400" y1="0" x2="400" y2="800" stroke="#555555" strokeWidth="0.2" />
+          <line x1="0" y1="200" x2="800" y2="200" stroke="#555555" strokeWidth="0.2" />
+          <line x1="0" y1="400" x2="800" y2="400" stroke="#555555" strokeWidth="0.2" />
+          <line x1="0" y1="600" x2="800" y2="600" stroke="#555555" strokeWidth="0.2" />
+
+          {/* Static circles */}
           <g style={{ transformOrigin: "400px 400px" }}>
-            <circle cx="400" cy="400" r="380" fill="none" stroke="#888888" strokeWidth="0.3" opacity="0.5" />
-            <circle cx="400" cy="400" r="280" fill="none" stroke="#888888" strokeWidth="0.3" opacity="0.4" strokeDasharray="2 8" />
+            <circle cx="400" cy="400" r="380" fill="none" stroke="#555555" strokeWidth="0.2" opacity="0.5" />
+            <circle cx="400" cy="400" r="280" fill="none" stroke="#555555" strokeWidth="0.2" opacity="0.4" strokeDasharray="2 8" />
           </g>
-          <circle cx="200" cy="200" r="160" fill="none" stroke="#888888" strokeWidth="0.4" />
-          <circle cx="200" cy="200" r="120" fill="none" stroke="#888888" strokeWidth="0.3" />
+          <circle cx="200" cy="200" r="160" fill="none" stroke="#555555" strokeWidth="0.25" />
+          <circle cx="200" cy="200" r="120" fill="none" stroke="#555555" strokeWidth="0.2" />
+
+          {/* Static quarter-circles */}
           <path d="M 200 200 L 400 200 A 200 200 0 0 1 200 400 Z" fill="#E01B24" opacity="0.05" />
           <path d="M 0 400 L 200 400 A 200 200 0 0 0 0 600 Z" fill="#ffffff" opacity="0.08" />
+
+          {/* Animated upper arcs (y=400, sweep clockwise top-to-right) */}
+          <path className="ring-arc" d="M 170 400 A 30 30 0 0 1 230 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="95" strokeDashoffset="95"
+            style={{ "--path-len": 95, animation: "stroke-draw 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s forwards" }} />
+          <path className="ring-arc" d="M 145 400 A 55 55 0 0 1 255 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="173" strokeDashoffset="173"
+            style={{ "--path-len": 173, animation: "stroke-draw 0.85s cubic-bezier(0.4,0,0.2,1) 0.18s forwards" }} />
+          <path className="ring-arc" d="M 120 400 A 80 80 0 0 1 280 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="251" strokeDashoffset="251"
+            style={{ "--path-len": 251, animation: "stroke-draw 0.9s cubic-bezier(0.4,0,0.2,1) 0.26s forwards" }} />
+          <path className="ring-arc" d="M 95 400 A 105 105 0 0 1 305 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="330" strokeDashoffset="330"
+            style={{ "--path-len": 330, animation: "stroke-draw 0.95s cubic-bezier(0.4,0,0.2,1) 0.34s forwards" }} />
+          <path className="ring-arc" d="M 70 400 A 130 130 0 0 1 330 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="408" strokeDashoffset="408"
+            style={{ "--path-len": 408, animation: "stroke-draw 1s cubic-bezier(0.4,0,0.2,1) 0.42s forwards" }} />
+          <path className="ring-arc" d="M 45 400 A 155 155 0 0 1 355 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="487" strokeDashoffset="487"
+            style={{ "--path-len": 487, animation: "stroke-draw 1.05s cubic-bezier(0.4,0,0.2,1) 0.5s forwards" }} />
+          <path className="ring-arc" d="M 20 400 A 180 180 0 0 1 380 400" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="565" strokeDashoffset="565"
+            style={{ "--path-len": 565, animation: "stroke-draw 1.1s cubic-bezier(0.4,0,0.2,1) 0.58s forwards" }} />
+
+          {/* Animated lower arcs (y=600, sweep counterclockwise bottom-to-right) */}
+          <path className="ring-arc" d="M 170 600 A 30 30 0 0 0 230 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="95" strokeDashoffset="95"
+            style={{ "--path-len": 95, animation: "stroke-draw 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s forwards" }} />
+          <path className="ring-arc" d="M 145 600 A 55 55 0 0 0 255 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="173" strokeDashoffset="173"
+            style={{ "--path-len": 173, animation: "stroke-draw 0.85s cubic-bezier(0.4,0,0.2,1) 0.18s forwards" }} />
+          <path className="ring-arc" d="M 120 600 A 80 80 0 0 0 280 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="251" strokeDashoffset="251"
+            style={{ "--path-len": 251, animation: "stroke-draw 0.9s cubic-bezier(0.4,0,0.2,1) 0.26s forwards" }} />
+          <path className="ring-arc" d="M 95 600 A 105 105 0 0 0 305 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="330" strokeDashoffset="330"
+            style={{ "--path-len": 330, animation: "stroke-draw 0.95s cubic-bezier(0.4,0,0.2,1) 0.34s forwards" }} />
+          <path className="ring-arc" d="M 70 600 A 130 130 0 0 0 330 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="408" strokeDashoffset="408"
+            style={{ "--path-len": 408, animation: "stroke-draw 1s cubic-bezier(0.4,0,0.2,1) 0.42s forwards" }} />
+          <path className="ring-arc" d="M 45 600 A 155 155 0 0 0 355 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="487" strokeDashoffset="487"
+            style={{ "--path-len": 487, animation: "stroke-draw 1.05s cubic-bezier(0.4,0,0.2,1) 0.5s forwards" }} />
+          <path className="ring-arc" d="M 20 600 A 180 180 0 0 0 380 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="565" strokeDashoffset="565"
+            style={{ "--path-len": 565, animation: "stroke-draw 1.1s cubic-bezier(0.4,0,0.2,1) 0.58s forwards" }} />
+          <path className="ring-arc" d="M -5 600 A 205 205 0 0 0 405 600" fill="none" stroke="#555555" strokeWidth="0.35"
+            strokeDasharray="644" strokeDashoffset="644"
+            style={{ "--path-len": 644, animation: "stroke-draw 1.15s cubic-bezier(0.4,0,0.2,1) 0.66s forwards" }} />
         </svg>
       </div>
 
