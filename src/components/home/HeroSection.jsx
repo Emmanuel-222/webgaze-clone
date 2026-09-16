@@ -6,7 +6,7 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex flex-col overflow-hidden bg-[#111111] text-[#fafafa]">
-      <div className="hero-stagger absolute left-0 top-0 h-full w-auto max-w-[55%] pointer-events-none select-none opacity-[0.07]" style={{ animationDelay: '0ms' }}>
+      <div className="hero-stagger absolute left-0 top-0 h-full w-auto max-w-[40%] sm:max-w-[55%] pointer-events-none select-none opacity-[0.07]" style={{ animationDelay: '0ms' }}>
       <svg
         viewBox="0 0 800 800"
         xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +195,7 @@ export default function HeroSection() {
 
       <div className="hero-stagger absolute -bottom-40 -right-40 w-[720px] h-[720px] bg-red-brand/[0.03] blur-[160px] rounded-full pointer-events-none" style={{ animationDelay: '0ms' }}></div>
 
-      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-end text-right pt-32 pb-12">
+      <div className="container-wide w-full relative z-10 flex-1 flex flex-col justify-center items-end text-right pt-28 sm:pt-32 pb-10 sm:pb-12">
         <h1 className="hero-stagger font-display font-bold leading-[1.05] tracking-[-0.04em] text-white text-[clamp(1.85rem,4.5vw,4.4rem)]" style={{ animationDelay: '150ms' }}>
           <span className="block">We build modern brands</span>
           <span className="block">and digital experiences</span>

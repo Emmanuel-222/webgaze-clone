@@ -336,11 +336,25 @@ export default function Navbar() {
           isDarkSection ? 'bg-[#111111]/95' : 'bg-white/95'
         } ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
-        <div className="flex h-full flex-col items-center justify-center gap-6">
+        {/* Mobile close button */}
+        <button
+          onClick={() => setIsOpen(false)}
+          className={`absolute top-5 right-5 z-[100] flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 ${
+            isDarkSection ? 'text-white/70 hover:text-white' : 'text-[#0a0a0a]/70 hover:text-[#0a0a0a]'
+          }`}
+          aria-label="Close menu"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div className="flex h-full flex-col items-center justify-center gap-8">
           {navLinks.map((link) => {
             if (!isBuilt(link.href)) {
               return (
-                <span key={link.label} className={`text-2xl font-semibold transition-colors duration-300 cursor-default select-none ${isDarkSection ? 'text-white/30' : 'text-[#0a0a0a]/30'}`}>
+                <span key={link.label} className={`text-[1.35rem] font-semibold transition-colors duration-300 cursor-default select-none ${isDarkSection ? 'text-white/30' : 'text-[#0a0a0a]/30'}`}>
                   {link.label}
                 </span>
               )
@@ -349,7 +363,8 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 to={link.href}
-                className={`text-2xl font-semibold transition-colors duration-300 ${
+                onClick={() => setIsOpen(false)}
+                className={`text-[1.35rem] font-semibold transition-colors duration-300 ${
                   location.pathname === link.href ? 'text-red-brand' : isDarkSection ? 'text-white/70 hover:text-white' : 'text-[#0a0a0a]/70 hover:text-[#0a0a0a]'
                 }`}
               >
