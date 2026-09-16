@@ -333,48 +333,100 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={`fixed inset-0 top-0 z-[99] backdrop-blur-xl transition-all duration-300 lg:hidden ${
-          isDarkSection ? 'bg-[#111111]/95' : 'bg-white/95'
+          isDarkSection ? 'bg-[#111111]/98' : 'bg-[#111111]/98'
         } ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
         {/* Mobile close button */}
         <button
           onClick={() => setIsOpen(false)}
-          className={`absolute top-5 right-5 z-[100] flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 ${
-            isDarkSection ? 'text-white/70 hover:text-white' : 'text-[#0a0a0a]/70 hover:text-[#0a0a0a]'
-          }`}
+          className="absolute top-5 right-5 z-[100] flex h-10 w-10 items-center justify-center rounded-full text-white/70 hover:text-white transition-colors duration-300"
           aria-label="Close menu"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
           </svg>
         </button>
 
-        <div className="flex h-full flex-col items-center justify-center gap-8">
-          {navLinks.map((link) => {
-            if (!isBuilt(link.href)) {
+        <div className="flex h-full flex-col px-8 pt-24 pb-10 overflow-y-auto">
+          {/* MENU label */}
+          <span className="font-display text-[10px] font-bold uppercase tracking-[0.24em] text-red-brand mb-6">
+            Menu
+          </span>
+
+          {/* Nav links with numbers */}
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link, index) => {
+              const num = String(index + 1).padStart(2, '0')
+              const isActive = location.pathname === link.href
+              if (!isBuilt(link.href)) {
+                return (
+                  <div key={link.label} className="flex items-center gap-4 py-3 border-b border-white/10">
+                    <span className="font-display text-xs text-white/30">{num}</span>
+                    <span className="font-display text-[1.1rem] font-semibold text-white/30 cursor-default select-none">
+                      {link.label}
+                    </span>
+                  </div>
+                )
+              }
               return (
-                <span key={link.label} className={`text-[1.35rem] font-semibold transition-colors duration-300 cursor-default select-none ${isDarkSection ? 'text-white/30' : 'text-[#0a0a0a]/30'}`}>
-                  {link.label}
-                </span>
+                <Link
+                  key={link.label}
+                  to={link.href}
+                  onClick={() => setIsOpen(false)}
+                  className="flex items-center gap-4 py-3 border-b border-white/10"
+                >
+                  <span className={`font-display text-xs ${isActive ? 'text-red-brand' : 'text-white/40'}`}>{num}</span>
+                  <span className={`font-display text-[1.1rem] font-semibold transition-colors duration-300 ${isActive ? 'text-red-brand' : 'text-white/80 hover:text-white'}`}>
+                    {link.label}
+                  </span>
+                  {link.label === 'Services' && (
+                    <svg className="ml-auto w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                  )}
+                </Link>
               )
-            }
-            return (
-              <Link
-                key={link.label}
-                to={link.href}
-                onClick={() => setIsOpen(false)}
-                className={`text-[1.35rem] font-semibold transition-colors duration-300 ${
-                  location.pathname === link.href ? 'text-red-brand' : isDarkSection ? 'text-white/70 hover:text-white' : 'text-[#0a0a0a]/70 hover:text-[#0a0a0a]'
-                }`}
-              >
-                {link.label}
-              </Link>
-            )
-          })}
-          <Link to="/request-a-quote" className="btn-primary mt-4">
-            Request a Proposal
+            })}
+          </div>
+
+          {/* CTA Button */}
+          <Link to="/request-a-quote" onClick={() => setIsOpen(false)} className="mt-8 inline-flex items-center justify-center gap-2 bg-red-brand text-white font-display font-semibold text-sm px-7 py-4 rounded-full hover:bg-red-dark transition-colors duration-200">
+            Request a Proposal <span>→</span>
           </Link>
+
+          {/* Contact info */}
+          <div className="mt-auto pt-8">
+            <a href="mailto:hello@webgaze.com.au" className="block font-body text-sm text-white/70 hover:text-white transition-colors duration-200">
+              hello@webgaze.com.au
+            </a>
+            <a href="tel:0422169233" className="block font-body text-sm text-white/70 hover:text-white transition-colors duration-200 mt-1">
+              0422 169 233
+            </a>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-3 mt-5">
+              <a href="https://www.linkedin.com/company/webgaze" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:border-red-brand hover:text-red-brand transition-colors duration-200">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect>
+                  <circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/webgaze.au" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:border-red-brand hover:text-red-brand transition-colors duration-200">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+              <a href="https://x.com/webgaze_au" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/50 hover:border-red-brand hover:text-red-brand transition-colors duration-200">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </header>

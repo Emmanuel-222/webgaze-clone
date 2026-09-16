@@ -35,28 +35,29 @@ export default function ProcessSection() {
       <div className="absolute top-0 inset-x-0 h-px bg-white/10"></div>
       <div className="pointer-events-none absolute inset-0 opacity-60" style={{ background: 'radial-gradient(45% 40% at 85% 15%, rgba(224,27,36,0.08), transparent 70%)' }}></div>
       <div className="container-wide relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 mb-16 md:mb-20">
-          <div>
-            <div className="flex items-center gap-3 mb-5">
-              <span className="block w-8 h-[2px] bg-red-brand"></span>
-              <span className="font-display text-xs font-semibold tracking-[0.22em] uppercase text-red-brand">How We Work</span>
-            </div>
-            <h2 className="font-display font-bold text-[clamp(2rem,5vw,2.8rem)] text-white leading-[1.1]">
-              A process built for clarity, not chaos.
-            </h2>
-          </div>
-          <p className="lg:pt-2 lg:self-end font-body text-base text-white/55 leading-relaxed max-w-md">
+        {/* Header */}
+        <div className="mb-10 md:mb-16">
+          <h2 className="font-display font-bold text-[clamp(2rem,5vw,2.8rem)] text-white leading-[1.1]">
+            A process built for clarity,<br className="hidden sm:block" /> not chaos.
+          </h2>
+          <p className="mt-6 font-body text-base text-white/55 leading-relaxed max-w-md">
             From the first conversation to final delivery, every step is intentional — keeping you informed, on time, and confident in the outcome.
           </p>
         </div>
 
+        {/* Steps */}
         <div className="relative">
+          {/* Vertical line connecting steps on mobile */}
+          <div className="absolute top-0 bottom-0 left-[1.375rem] w-px bg-white/10 lg:hidden"></div>
+          {/* Horizontal line on desktop */}
           <div className="hidden lg:block absolute top-[1.375rem] left-0 right-0 h-px bg-white/10"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-14 gap-x-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
             {steps.map((step) => (
-              <div key={step.number} className="relative">
-                <div className="relative z-10 mb-7">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#111111] font-display font-bold text-sm tracking-[0.1em] text-red-brand">
+              <div key={step.number} className="relative pl-12 lg:pl-0">
+                {/* Number circle */}
+                <div className="relative z-10 mb-6 -ml-12 lg:ml-0">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#101010] font-display font-bold text-sm tracking-[0.1em] text-red-brand">
                     {step.number}
                   </span>
                 </div>
