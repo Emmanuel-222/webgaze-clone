@@ -31,7 +31,7 @@ const steps = [
 
 export default function ProcessSection() {
   return (
-    <section className="relative bg-[#101010] overflow-hidden section-pad">
+    <section className="relative bg-dark-surface overflow-hidden section-pad">
       <div className="absolute top-0 inset-x-0 h-px bg-white/10"></div>
       <div className="pointer-events-none absolute inset-0 opacity-60" style={{ background: 'radial-gradient(45% 40% at 85% 15%, rgba(224,27,36,0.08), transparent 70%)' }}></div>
       <div className="container-wide relative z-10">
@@ -57,7 +57,7 @@ export default function ProcessSection() {
               <div key={step.number} className="relative pl-12 lg:pl-0">
                 {/* Number circle */}
                 <div className="relative z-10 mb-6 -ml-12 lg:ml-0">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-[#101010] font-display font-bold text-sm tracking-[0.1em] text-red-brand">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-dark-bg font-display font-bold text-sm tracking-[0.1em] text-red-brand">
                     {step.number}
                   </span>
                 </div>

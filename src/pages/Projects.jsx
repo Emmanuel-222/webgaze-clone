@@ -40,13 +40,13 @@ export default function Projects() {
   }, [filteredProjects])
 
   return (
-    <div className="min-h-screen bg-[#f4f4f1]">
+    <div className="min-h-screen bg-light-bg">
       <Navbar />
 
-      <section className="relative overflow-hidden min-h-[360px] sm:min-h-[420px] flex flex-col items-center justify-center bg-[#111111] pb-12 sm:pb-14 pt-32 sm:pt-40">
+      <section className="relative overflow-hidden min-h-[360px] sm:min-h-[420px] flex flex-col items-center justify-center bg-dark-bg pb-12 sm:pb-14 pt-32 sm:pt-40">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
-        <div className="container-wide relative z-10 text-center">
-          <h1 className="font-display font-bold text-white text-[clamp(2.55rem,10.5vw,4.2rem)] leading-[1.02] tracking-[-0.035em]">
+        <div className="container-wide relative z-10 text-center overflow-hidden">
+          <h1 className="font-display font-bold text-white text-[clamp(2rem,8vw,4.2rem)] leading-[1.02] tracking-[-0.02em] sm:tracking-[-0.035em]">
             Our Work
           </h1>
           <p className="mt-5 font-body text-white/50 text-base md:text-lg leading-relaxed max-w-[50ch] mx-auto">
@@ -55,8 +55,8 @@ export default function Projects() {
         </div>
       </section>
 
-      <section className="bg-[#f4f4f1] px-5 py-14 md:px-10 md:py-20 lg:px-16">
-        <div className="mx-auto max-w-[1320px]">
+      <section className="bg-light-bg px-5 py-14 md:px-10 md:py-20 lg:px-16">
+        <div className="mx-auto max-w-[1400px]">
           <div className="mb-10 flex flex-col gap-5 border-b border-[#dcdcd6] pb-6 md:flex-row md:items-center md:justify-between">
             <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#101010]">
               Selected Work

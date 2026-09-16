@@ -107,7 +107,7 @@ export default function ProjectsParallax() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-[#111111] antialiased h-[200vh] md:h-[220vh]"
+      className="relative bg-dark-bg antialiased h-[200vh] md:h-[220vh]"
       aria-labelledby="parallax-heading"
     >
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col [perspective:1000px] [transform-style:preserve-3d] pt-16 md:pt-20 pb-10">

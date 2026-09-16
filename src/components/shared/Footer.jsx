@@ -12,7 +12,7 @@ const serviceLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#111111] text-[#fafafa] border-t border-dark-border">
+    <footer className="bg-[#0a0a0a] text-[#fafafa] border-t border-dark-border">
       <div className="container-wide py-10 md:py-16 lg:py-20">
         <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 md:gap-10 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
@@ -23,7 +23,7 @@ export default function Footer() {
                 src="/images/logo-white.png"
               />
             </Link>
-            <p className="text-sm text-[#9a9a92] font-body leading-relaxed max-w-[320px]">
+            <p className="text-sm text-dark-muted font-body leading-relaxed max-w-[320px]">
               Building high-performance websites, AI-assisted custom systems, and practical digital tools for growing businesses.
             </p>
             <div className="flex items-center gap-3 mt-5">

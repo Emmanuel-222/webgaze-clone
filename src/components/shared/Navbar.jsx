@@ -169,7 +169,7 @@ export default function Navbar() {
   }, [location])
 
   useEffect(() => {
-    const DARK_CLASSES = ['bg-[#111111]', 'bg-[#101010]', 'bg-[#0a0a0a]', 'bg-[#0f0f0f]', 'bg-dark-surface', 'bg-[#111]']
+    const DARK_CLASSES = ['bg-[#0E0E11]', 'bg-[#111111]', 'bg-[#101010]', 'bg-[#0a0a0a]', 'bg-[#0f0f0f]', 'bg-dark-bg', 'bg-dark-surface', 'bg-[#111]']
     const LIGHT_CLASSES = ['bg-[#f4f4f1]', 'bg-light-bg', 'bg-white']
 
     const checkSection = () => {
@@ -333,7 +333,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       <div
         className={`fixed inset-0 top-0 z-[99] backdrop-blur-xl transition-all duration-300 lg:hidden ${
-          isDarkSection ? 'bg-[#111111]/98' : 'bg-[#111111]/98'
+          isDarkSection ? 'bg-[#0E0E11]/98' : 'bg-[#0E0E11]/98'
         } ${isOpen ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
       >
         {/* Mobile close button */}

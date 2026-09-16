@@ -45,7 +45,7 @@ export default function ServicesSection() {
                   <div className="border-t border-light-border pt-5 flex items-center justify-between gap-4">
                     <a
                       href={`/services/${service.slug || service.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '')}`}
-                      className="inline-flex items-center gap-2 font-display font-semibold text-sm text-[#0f0f0f] border border-[#0f0f0f] rounded-full px-4 py-2 hover:bg-[#0f0f0f] hover:text-white transition-all duration-200"
+                      className="inline-flex items-center gap-2 font-display font-semibold text-sm text-[#0f0f0f] border border-light-border rounded-full px-4 py-2 hover:border-red-brand hover:text-red-brand transition-all duration-200"
                     >
                       Learn more →
                     </a>

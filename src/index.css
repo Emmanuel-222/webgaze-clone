@@ -2,20 +2,20 @@
 
 @theme {
   --color-red-brand: #E01B24;
-  --color-red-dark: #c4161e;
-  --color-dark-bg: #111111;
-  --color-dark-surface: #181818;
-  --color-dark-elevated: #111;
-  --color-dark-muted: #9a9a92;
-  --color-dark-border: #292929;
-  --color-light-bg: #f4f4f1;
-  --color-light-muted: #b0b0a8;
-  --color-light-border: #cfcfca;
+  --color-red-dark: #B01219;
+  --color-dark-bg: #0E0E11;
+  --color-dark-surface: #18181C;
+  --color-dark-elevated: #212127;
+  --color-dark-muted: #8A8A8A;
+  --color-dark-border: #2C2C33;
+  --color-light-bg: #FAFAFA;
+  --color-light-muted: #1C1C1C;
+  --color-light-border: #E0E0E0;
 
-  --font-display: "Inter", sans-serif;
+  --font-display: "DM Sans", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  --max-width-wide: 1320px;
+  --max-width-wide: 1400px;
 }
 
 @layer base {
@@ -34,27 +34,35 @@
 }
 
 @utility btn-primary {
-  @apply inline-flex items-center justify-center gap-2 rounded-full bg-red-brand px-6 py-3 text-sm font-semibold text-white transition-colors duration-200 hover:bg-red-dark;
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-red-brand px-7 py-3.5 text-sm font-semibold text-white uppercase tracking-[0.025em] transition-all duration-300 hover:bg-red-dark;
 }
 
 @utility btn-outline {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-200 hover:border-white/40 hover:bg-white/10;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white uppercase tracking-[0.025em] transition-all duration-300 hover:border-red-brand hover:bg-red-brand hover:text-white;
 }
 
 @utility btn-outline-dark {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-light-border bg-white px-6 py-3 text-sm font-semibold text-[#4a4a4a] transition-all duration-200 hover:border-red-brand hover:text-red-brand;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-light-border bg-white px-7 py-3.5 text-sm font-semibold text-[#4a4a4a] uppercase tracking-[0.025em] transition-all duration-300 hover:border-red-brand hover:text-red-brand;
 }
 
 @utility label-tag {
-  @apply inline-block rounded-full border border-red-brand/20 bg-red-brand/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.24em] text-red-brand;
+  @apply inline-flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.22em] text-red-brand;
+}
+
+.label-tag::before {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1px;
+  background-color: #E01B24;
 }
 
 @utility container-wide {
-  @apply mx-auto w-full max-w-wide px-5 lg:px-8;
+  @apply mx-auto w-full max-w-wide px-4 md:px-10 lg:px-16;
 }
 
 @utility section-pad {
-  @apply py-16 md:py-24;
+  @apply py-12 md:py-28 lg:py-36;
 }
 
 @utility divider {
@@ -62,11 +70,21 @@
 }
 
 @utility text-display-md {
-  font-size: clamp(2rem, 5vw, 2.8rem);
+  font-size: clamp(1.4rem, 2.5vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+@utility text-display-lg {
+  font-size: clamp(1.8rem, 3vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 @utility text-display-xl {
-  font-size: clamp(2.55rem, 10.5vw, 3.7rem);
+  font-size: clamp(2.8rem, 6vw, 6rem);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
 }
 
 @keyframes blink {
