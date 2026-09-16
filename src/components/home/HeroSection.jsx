@@ -203,10 +203,8 @@ export default function HeroSection() {
 
         <p className="hero-stagger mt-6 font-display font-semibold tracking-[-0.015em] text-white/70 text-[clamp(1.3rem,2.8vw,2.8rem)]" style={{ animationDelay: '300ms' }}>
           Designed to{' '}
-          <span className="relative inline-block">
-            <span className="font-bold text-red-brand">{typedText}</span>
-            <span className="animate-blink font-normal text-red-brand">|</span>
-          </span>
+          <span style={{ fontWeight: 700, color: '#E01B24', background: 'transparent' }}>{typedText}</span>
+          <span className="animate-blink" style={{ fontWeight: 400, color: '#E01B24', background: 'transparent' }}>|</span>
         </p>
 
         <p className="hero-stagger mt-9 ml-auto max-w-xl text-left font-body text-base md:text-lg text-white/65 leading-relaxed" style={{ animationDelay: '450ms' }}>

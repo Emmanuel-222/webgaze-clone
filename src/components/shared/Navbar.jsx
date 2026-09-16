@@ -4,18 +4,27 @@ import { navLinks } from '../../data/navigation'
 
 const BUILT_ROUTES = ['/', '/projects']
 
-function NavItemLink({ link, isActive, isDarkSection, isBuilt, itemRef, onHover, onLeave }) {
+function NavItemLink({ link, isActive, isDarkSection, isBuilt, itemRef, onHover, onLeave, isHovered }) {
+  const hasPill = isActive || isHovered
+
+  const getTextColor = () => {
+    if (hasPill) return '#ffffff'
+    if (isDarkSection) return 'rgba(255,255,255,0.72)'
+    return 'rgba(10,10,10,0.7)'
+  }
+
   if (!isBuilt) {
     return (
       <span
         ref={itemRef}
         onMouseEnter={onHover}
         onMouseLeave={onLeave}
-        className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-300 cursor-pointer select-none"
+        className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold cursor-pointer select-none"
       >
-        <span className={`relative z-10 transition-colors duration-300 ${
-          isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
-        }`}>
+        <span
+          className="relative z-10"
+          style={{ color: getTextColor(), transition: 'color 0.3s ease' }}
+        >
           {link.label}
         </span>
       </span>
@@ -28,20 +37,34 @@ function NavItemLink({ link, isActive, isDarkSection, isBuilt, itemRef, onHover,
       to={link.href}
       onMouseEnter={onHover}
       onMouseLeave={onLeave}
-      className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand"
+      className="group relative flex h-8 items-center overflow-hidden rounded-full px-3 font-display text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand"
     >
-      <span className={`relative z-10 transition-colors duration-300 ${
-        isActive ? 'text-white' : isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
-      }`}>
+      <span
+        className="relative z-10"
+        style={{ color: getTextColor(), transition: 'color 0.3s ease' }}
+      >
         {link.label}
       </span>
     </Link>
   )
 }
 
-function ServicesDropdown({ isDarkSection, itemRef, onHover, onLeave }) {
+function ServicesDropdown({ isDarkSection, itemRef, onHover, onLeave, isHovered }) {
   const [isOpen, setIsOpen] = useState(false)
   const closeTimerRef = useRef(null)
+
+  const hasPill = isHovered || isOpen
+
+  const getTextColor = () => {
+    if (hasPill) return '#ffffff'
+    if (isDarkSection) return 'rgba(255,255,255,0.72)'
+    return 'rgba(10,10,10,0.7)'
+  }
+
+  const getChevronColor = () => {
+    if (isDarkSection) return 'rgba(255,255,255,0.5)'
+    return 'rgba(10,10,10,0.4)'
+  }
 
   const handleMouseEnter = () => {
     clearTimeout(closeTimerRef.current)
@@ -78,14 +101,13 @@ function ServicesDropdown({ isDarkSection, itemRef, onHover, onLeave }) {
         aria-controls="services-menu"
         className="group relative flex h-8 items-center gap-1 overflow-hidden rounded-full px-3 font-display text-sm font-semibold transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-brand cursor-pointer select-none"
       >
-        <span className={`relative z-10 transition-colors duration-300 ${
-          isDarkSection ? 'text-white/72' : 'text-[#0a0a0a]/60'
-        }`}>
+        <span
+          className="relative z-10"
+          style={{ color: getTextColor(), transition: 'color 0.3s ease' }}
+        >
           Services
         </span>
-        <svg className={`relative z-10 w-3 h-3 mt-0.5 transition-all duration-300 ${
-          isOpen ? 'rotate-180' : ''
-        } ${isDarkSection ? 'text-white/50' : 'text-[#0a0a0a]/40'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <svg className="relative z-10 w-3 h-3 mt-0.5" style={{ color: getChevronColor(), transition: 'all 0.3s ease', transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
@@ -268,6 +290,7 @@ export default function Navbar() {
                     itemRef={(el) => { itemRefs.current[index] = el }}
                     onHover={() => handleItemHover(index)}
                     onLeave={handleItemLeave}
+                    isHovered={hoveredIndex === index}
                   />
                 )
               }
@@ -281,6 +304,7 @@ export default function Navbar() {
                   itemRef={(el) => { itemRefs.current[index] = el }}
                   onHover={() => handleItemHover(index)}
                   onLeave={handleItemLeave}
+                  isHovered={hoveredIndex === index}
                 />
               )
             })}
