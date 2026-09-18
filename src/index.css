@@ -9,6 +9,7 @@
   --color-dark-muted: #8A8A8A;
   --color-dark-border: #2C2C33;
   --color-light-bg: #FAFAFA;
+  --color-light-surface: #F4F4F1;
   --color-light-muted: #1C1C1C;
   --color-light-border: #E0E0E0;
 
@@ -38,7 +39,7 @@
 }
 
 @utility btn-outline {
-  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-transparent px-7 py-3.5 text-sm font-semibold text-white uppercase tracking-[0.025em] transition-all duration-300 hover:border-red-brand hover:bg-red-brand hover:text-white;
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-current bg-transparent px-7 py-3.5 text-sm font-semibold uppercase tracking-[0.025em] transition-all duration-300 hover:border-red-brand hover:bg-red-brand hover:text-white;
 }
 
 @utility btn-outline-dark {
@@ -67,6 +68,12 @@
 
 @utility divider {
   @apply border-t border-dark-border;
+}
+
+@utility text-display-mob {
+  font-size: clamp(1.85rem, 7.5vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
 }
 
 @utility text-display-md {
@@ -144,6 +151,16 @@
 .hero-stagger {
   opacity: 0;
   animation: hero-fade-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes hero-svg-fade {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 0.18; transform: scale(1); }
+}
+
+.hero-svg {
+  opacity: 0;
+  animation: hero-svg-fade 1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
 }
 
 @keyframes stroke-draw {

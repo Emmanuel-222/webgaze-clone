@@ -42,22 +42,35 @@ export default function Projects() {
   return (
     <div className="min-h-screen bg-light-bg">
       <Navbar />
-
-      <section className="relative overflow-hidden min-h-[360px] sm:min-h-[420px] flex flex-col items-center justify-center bg-dark-bg pb-12 sm:pb-14 pt-32 sm:pt-40">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/80 to-[#0a0a0a]"></div>
-        <div className="container-wide relative z-10 text-center overflow-hidden">
-          <h1 className="font-display font-bold text-white text-[clamp(2rem,8vw,4.2rem)] leading-[1.02] tracking-[-0.02em] sm:tracking-[-0.035em]">
-            Our Work
-          </h1>
-          <p className="mt-5 font-body text-white/50 text-base md:text-lg leading-relaxed max-w-[50ch] mx-auto">
-            Selected websites, brands, and digital systems built for businesses across Australia.
-          </p>
+      <main>
+        <section className="relative overflow-hidden min-h-[380px] flex flex-col justify-end bg-[#0a0a0a] pb-16 pt-36">
+        <img alt="" aria-hidden="true" className="object-cover object-center absolute inset-0 h-full w-full" src="/images/hero-bg.jpg" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-black/20"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
+        <div className="container-wide relative z-10">
+          <div className="max-w-[760px]">
+            <div className="mb-5">
+              <a
+                className="group inline-flex items-center gap-2 text-white/40 hover:text-white/80 text-sm font-display font-medium transition-colors duration-200"
+                aria-label="Go back"
+                href="/"
+              >
+                <span className="transition-transform duration-200 group-hover:-translate-x-1 text-base leading-none">←</span>
+              </a>
+            </div>
+            <h1 className="font-display font-bold text-white max-w-[18ch] text-[clamp(2.55rem,10.5vw,3.7rem)] leading-[1.02] tracking-[-0.035em] lg:text-display-xl lg:leading-[1.04] lg:tracking-[-0.04em]">
+              Our Work
+            </h1>
+            <p className="mt-4 font-body text-white/55 text-base leading-relaxed max-w-[44ch]">
+              Selected websites, brands, and digital systems built for businesses across Australia.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section className="bg-light-bg px-5 py-14 md:px-10 md:py-20 lg:px-16">
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mb-10 flex flex-col gap-5 border-b border-[#dcdcd6] pb-6 md:flex-row md:items-center md:justify-between">
+      <section className="bg-[#f4f4f1] px-4 py-14 md:px-10 md:py-20 lg:px-16">
+        <div className="mx-auto max-w-[1320px]">
+          <div className="mb-12 flex flex-col gap-5 border-b border-[#dcdcd6] pb-6 md:flex-row md:items-center md:justify-between">
             <p className="font-display text-xs font-bold uppercase tracking-[0.22em] text-[#101010]">
               Selected Work
               <span className="ml-3 font-body text-[#a3a39b]">
@@ -81,13 +94,14 @@ export default function Projects() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}
           </div>
         </div>
-      </section>
+        </section>
+      </main>
 
       <CTABanner />
       <Footer />

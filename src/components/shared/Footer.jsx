@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { navLinks } from '../../data/navigation'
 
 const serviceLinks = [
   { label: 'Website Design & Development', href: '/services/website-design' },
@@ -8,6 +7,14 @@ const serviceLinks = [
   { label: 'Search Engine Optimisation', href: '/services/seo' },
   { label: 'Visual Branding', href: '/services/visual-branding' },
   { label: 'Consulting & Audit', href: '/services/consulting' },
+]
+
+const companyLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Services', href: '/services' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Insights', href: '/insights' },
 ]
 
 export default function Footer() {
@@ -83,7 +90,7 @@ export default function Footer() {
           <div>
             <p className="font-display text-xs font-semibold tracking-[0.18em] uppercase text-dark-muted mb-4">Company</p>
             <ul className="space-y-2.5">
-              {navLinks.map((link) => (
+              {companyLinks.map((link) => (
                 <li key={link.label}>
                   <Link to={link.href} className="text-sm text-[#c0c0c0] hover:text-red-brand transition-colors duration-200">
                     {link.label}
@@ -132,10 +139,10 @@ export default function Footer() {
             © 2026 WebGaze PTY LTD. All rights reserved. ABN 53 694 048 158
           </p>
           <div className="flex gap-5">
-            <a href="#" className="text-xs text-dark-muted hover:text-red-brand transition-colors duration-200">
+            <a href="/terms-and-conditions" className="text-xs text-dark-muted hover:text-red-brand transition-colors duration-200">
               Terms &amp; Conditions
             </a>
-            <a href="#" className="text-xs text-dark-muted hover:text-red-brand transition-colors duration-200">
+            <a href="/privacy" className="text-xs text-dark-muted hover:text-red-brand transition-colors duration-200">
               Privacy &amp; Cookie Policy
             </a>
           </div>

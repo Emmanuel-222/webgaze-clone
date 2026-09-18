@@ -9,19 +9,19 @@ export const testimonials = [
   },
   {
     id: 2,
-    quote: 'Professional, responsive, and genuinely invested in our success. WebGaze delivered a website that exceeded our expectations.',
+    quote: 'From logo to website, everything came together exactly as we envisioned. They communicated well throughout and delivered a result we\'re genuinely proud of.',
     author: 'James Okonkwo',
     company: 'Australian Ghanaian Chamber of Commerce',
-    role: 'Industry Association',
+    role: 'Commerce & Trade Organisation',
     logo: '/images/logos/agcci.png',
   },
   {
     id: 3,
-    quote: 'The team at WebGaze understood our vision from day one. They built us a platform that truly represents our brand.',
+    quote: 'The level of craft and attention to detail was impressive. Our brand now feels cohesive and professional across every touchpoint.',
     author: 'David Chen',
-    company: 'Viride Energy Africa',
-    role: 'Energy Company',
-    logo: '/images/logos/viride.png',
+    company: 'WINSTAMAC',
+    role: 'Brand & Design',
+    initial: 'WM',
   },
 ]
 
